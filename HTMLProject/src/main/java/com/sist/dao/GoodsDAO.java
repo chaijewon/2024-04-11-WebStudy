@@ -1,7 +1,8 @@
 package com.sist.dao;
 import java.util.*;
 import java.sql.*;
-public class GoodsDAO {
+public class GoodsDAO 
+{
    private Connection conn;
    private PreparedStatement ps;
    private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
