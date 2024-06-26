@@ -1,0 +1,92 @@
+<!--
+	  95page 
+	  입력 양식 태그 
+	  =========== 사용자에게 정보를 입력할 수 있게 만들어 주는 태그
+	     로그인 아이디/비밀번호 , 회원가입 , 검색 , 페이지이동 ... 
+	     문자 입력 
+	       = 한줄 입력창 
+	         <input type="text">
+	         속성 
+	          type=""
+	          name : 자바에서 입력값을 받는 경우 , id,class => CSS , JS
+	          size="" 입력창 크기 
+	          required
+	       = 비밀번호 
+	         <input type="password">
+	         required
+	       = 여러개 입력 
+	         <textarea> 
+		     속성 
+		      name : 자바에서 입력값 읽기할때 
+		      rows : height
+		      cols : width
+		      required : 반드시 입력 유도 
+	     버튼 종류 
+	        = 일반 버튼
+	          <input type=button value="로그인"> 
+	          속성
+	           value : 버튼위에 설정하는 문자  
+	        = 전송 버튼 
+	          <input type=submit value="전송">
+	        = 초기화 
+	          <input type=reset value="초기화">
+	        = 이미지 
+	          <input type=image src="파일명">
+	        = 라디오
+	          <input type=radio name="sex" checked>남자
+	          <input type=radio name="sex">여자
+	          *** name속성이 같아야 한개만 선택된다 (그룹)
+	        = 체크버튼 
+	          <input type=checkbox value="">운동 
+	     선택 
+	        = 날짜
+	          <input type=date> : 달력 
+	        = 파일 
+	          <input type=file> : 파일 다이얼로그 
+	        = 지정된 데이터 선택 
+	          <select multiple> => 1개 선택  
+				  |
+			   <option>
+	        = 숫자선택 
+	          <input type=number>
+	        = 바선택
+	          <input type=range> 
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <!--
+	   <input type="text">
+	   => readonly : 입력이 안되게 만든다 
+	   => required : 반드시 입력값이 필요한 경우 
+	   => 레벨없이 사용 : placeholder="아이디"
+  -->
+  <h1>로그인</h1>
+  <form action="input.html">
+  <table width="350">
+	 <tr>
+		 <th width="30%">ID</th>
+		 <td width="70%">
+			 <input type="text" size="15" placeholder="아이디">
+		 </td>
+	 </tr>
+	 <tr>
+		 <th width="30%">Password</th>
+		 <td width="70%">
+			 <input type="password" size="15" required>
+		 </td>
+	 </tr>
+	 <tr>
+		 <td colspan="2" align="center">
+			 <input type="submit" value="로그인">
+			 <input type="button" value="취소">
+		 </td>
+	 </tr>
+  </table>
+  </form>
+</body>
+</html>
