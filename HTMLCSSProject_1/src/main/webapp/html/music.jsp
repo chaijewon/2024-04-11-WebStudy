@@ -20,6 +20,17 @@
    text-align: center;
  }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#keyword').keyup(function(){
+		let k=$('#keyword').val();
+		$('#user-table > tbody > tr').hide();
+		let temp=$('#user-table > tbody > tr > td:nth-child(5n+4):contains("'+k+'")');
+		$(temp).parent().show()
+	})
+})
+</script>
 </head>
 <body>
    <h1>뮤직 Top200</h1>
@@ -30,7 +41,8 @@
       </td>
      </tr>
    </table>
-   <table class="table_content">
+   <table class="table_content" id="user-table">
+    <thead>
      <tr>
        <th width=10%>순위</th>
        <th width=10%></th>
@@ -38,6 +50,8 @@
        <th width=30%>곡명</th>
        <th width=30%>가수명</th>
      </tr>
+    </thead>
+    <tbody>
      <%
         for(MusicVO vo:list)
         {
@@ -64,6 +78,7 @@
      <%
         }
      %>
+     </tbody>
    </table>
 </body>
 </html>
