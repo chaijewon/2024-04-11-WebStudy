@@ -73,6 +73,39 @@ public class MusicDAO {
 		   disConnection();
 	   }
    }
+   public List<MusicVO> musicAllData()
+   {
+	   List<MusicVO> list=new ArrayList<MusicVO>();
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT mno,state,idcrement,poster,title,singer "
+				     +"FROM genie_music "
+				     +"ORDER BY mno";
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   MusicVO vo=new MusicVO();
+			   vo.setMno(rs.getInt(1));
+			   vo.setState(rs.getString(2));
+			   vo.setIdcrement(rs.getInt(3));
+			   vo.setPoster(rs.getString(4));
+			   vo.setTitle(rs.getString(5));
+			   vo.setSinger(rs.getString(6));
+			   list.add(vo);
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return list;
+   }
    
 }
 

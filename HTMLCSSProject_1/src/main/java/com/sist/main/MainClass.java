@@ -4,6 +4,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import com.sist.dao.MusicDAO;
+import com.sist.dao.MusicVO;
+
 public class MainClass {
 
 	public static void main(String[] args) {
@@ -13,6 +16,7 @@ public class MainClass {
 	}
 	public void genieData()
 	{
+		MusicDAO dao=MusicDAO.newInstance();
 		try
 		{
 			int k=1;
@@ -49,6 +53,15 @@ public class MainClass {
 					System.out.println("등폭:"+id);
 					System.out.println("=======================================");
 				    k++;
+				    
+				    MusicVO vo=new MusicVO();
+				    vo.setAlbum(album.get(j).text());
+				    vo.setTitle(title.get(j).text());
+				    vo.setSinger(singer.get(j).text());
+				    vo.setPoster(poster.get(j).attr("src"));
+				    vo.setState(state);
+				    vo.setIdcrement(Integer.parseInt(id));
+				    dao.musicInsert(vo);
 				}
 			}
 		}catch(Exception ex){}
