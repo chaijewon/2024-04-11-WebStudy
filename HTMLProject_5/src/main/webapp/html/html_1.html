@@ -1,0 +1,154 @@
+<!--
+	HTML (브라우저에서 실행되는 언어) => ML사용이 가능하다 
+	ML (MarkUp Language) => 태그 + 속성 
+	<태그명 속성명=값> 
+	===== ====
+	=> HTML : 태그와 속성이 정해져 있다 => 정적 페이지 
+	   : 화면 UI
+	=> XML : 태그와 속성이 사용자 정의 => 태그와 속성을 직접 제작 => 확장된 MarkUp Language 
+	   : 문서 저장 , 환경 설정 => server.xml , application.xml ...
+	   : 서버단 => MyBatis / Spring 
+	=> JDBC / Parsing (데이터를 추출 : HTML/XML/JSON) => 크롤링 => HTML/XML에 있는 데이터 추출 
+	   => 오라클(데이터베이스 연결)
+	1. HTML 
+	   특징 : 정적페이지 (태그가 고정 = 표준화)
+	         이미 제작된 상태 = 암기 : 태그명 , 속성 , 화면 어떻게 출력 
+	                                          ============ 투박,위치 설정 => CSS,동작(JS)
+	   태그형식 
+	      = 여는 태그 / 닫는 태그 
+	        <태그>    </태그>   => <태그>출력할 내용</태그>
+	      = 독립 태그 
+	        <태그 />  => 데이터 출력 => <태그 속성="데이터 출력 위치"/>
+	        => <태그/>
+	              == 생략이 가능   <태그>  => <br> <p> <input> <img>
+	    태그의 종류 
+	      = 문자 출력 
+	         <b> : bold , <strong> : 강조체
+		     <h1>~<h6> : <h1>,<h3> : 제목 설정 
+			 *** 한줄문자열 => 줄바꿈 : 한줄내리기 <br> , 두줄 , 단락 <p>
+			 위첨자 : <sup>  
+	      = 목록 출력 
+	         <ul> : 순서가 없는 목록 
+			  |
+			 <li>  =====> 주로 메뉴 
+		     
+		     <dl> : 상세보기 
+			  |
+			======
+			|    |
+		   <dt> <dd>
+		   소제목  설명 
+		   감독 : 켈시 만 / 배우 : 에이미 포엘러 ,  마야 호크 ,  루이스 블랙 ,  필리스 스미스 ,  토니 헤일
+	        
+	        <table> : 사원목록 , 게시판 목록 , 노래 목록 ...
+			  |
+			 <tr>
+			  |
+		==============
+		|            |
+	   <th>         <td>
+	   제목          실제 데이터
+	   
+	   ******* 사이트 개발 => 가장 많이 등장 
+	           <a> : 앵커 => 화면 이동 
+			   <a href="URL주소">
+	     
+	      = 화면 분할 
+	      = 멀티 미디어 
+	        => 속성 => src=""
+	        <img src="이미지파일">
+	                 ========= gif|jpg|png 
+	                          ============
+	        <embed src="동영상"> <iframe src="추가될 파일명">(React,Vue에서 동영상 출력)
+				    ======== include (HTML파일에 특정부분에 다른 HTML을 추가할 수 있다)
+		    ================
+			<video> <audio> : 지정된 파일만 사용 
+		   = 사용자 입력창 
+		     <input>
+		        | = type="text" :한줄 입력 
+		            type="password" : 비밀번호 
+		            type="file" : 파일 선택
+		            type="color" : color select
+		            type="date" : 달력 
+		            type="hidden" : 화면은 보이지 않는다 => 데이터를 감추는 경우 
+		                            => UPDATE,DELETE,ID..
+		            type="radio" : 한개만 선택 => 그룹 설정 (name속성)
+		            type="checkbox" : 여러개를 동시에 선택 
+		            type="range" : silder => 반드시 max , min
+		            type="number" : Spinner => max,min => 숫자 선택 
+		            ============== 년도 / 월 
+		            type="button" : JavaScript 제어 
+		                            => 우편번호 검색 , 아이디 중복체크 , 취소 
+		            type="submit" : 서버로 데이터를 전송 
+		            ============== 반드시 동반 
+		                           <form>: 데이터를 모아서 한번에 서버로 전송 
+									  |
+									 속성 : method => 전송 방식 지정 
+									                ===========
+									                GET => URL뒤에 데이터를 첨부해서 전송
+									                       ?id=aaa....
+									                       노출 => 보안 취약
+									                POST => 내부네트워크 
+									                       중요 => 보안 
+									                
+									       action => 전송할 파일지정 
+									                 ===========
+								  *** 자바 => 메소드의 매개변수를 이용해서 데이터 전송 
+								            ===== 생성자 
+								  *** HTML/JSP는 메소드가 없다 
+								      ========= URL을 이용해서 전송 
+				http://localhost /HTMLProject_5/html/html_1.html  => URL	
+				================ ===============================		
+				      서버정보          사용자 요청 정보 (URI)
+				    HTMLProject_5/html/html_1.html?page=1
+				                       =========== 앞에 있는 파일이 전송된 데이터를 받는다
+				                       ?page = 1 => 값을 못받는다 
+				                       ?page=1 => 공백없이 사용 
+				   type="image" => submit(기능)
+				   =========================== <button> : submit기능 
+		     <select> : 한개 선택 , <select multiple> : 여러개 선택 => combobox
+				 |
+				<option> : 데이터 저장 
+			 <textarea> : 여러줄 입력 
+				 => 주의점 : 반드시 <textarea></textarea>
+				 => width(cols),height(rows)
+				 
+		 기타 : <fieldset> <label> <legend> : <table>을 대체
+			                     ========= border 구분  
+			  ======= 입력창을 모이서 처리 
+	     화면 분할 
+	       <div> : 전체 화면 분할 
+		   <span> : 부분적인 CSS를 적용 , 부메뉴 , 퀵메뉴 
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<table border="1" bordercolor="black" width="800" heigth="600">
+			<tr>
+				<td colspan="2" height="100"><iframe src="header.html" width="800"></iframe></td>
+			</tr>
+			<tr>
+				<td colspan="2" height="80"><iframe src="nav.html" width="800"></iframe></td>
+			</tr>
+			<tr>
+				<td width="200" height="320">
+					<iframe src="aside.html" width="200" height="320"></iframe>
+				</td>
+				<td width="600" height="320">
+					<iframe src="section.html" width="600" height="320"></iframe>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" height="100"><iframe src="footer.html" width="800"></iframe></td>
+			</tr>
+		</table>
+	</center>
+</body>
+</html>
+
+
