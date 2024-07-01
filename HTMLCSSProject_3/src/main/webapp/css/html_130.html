@@ -1,0 +1,82 @@
+<!--
+	  ID / CLASS 
+	  <div id="a">
+		  
+	  #a {
+		  
+	  }
+	  
+	  div#a{
+		  
+	  }
+	  
+	  class명 
+	  <h1 class="a"></h1>
+	  <h6 class="a"></h1>
+	  
+	  
+	  
+	  .a{
+		  
+	  }
+	  h1.a{
+		  
+	  }
+	  h6.a{
+		  
+	  }
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.a{
+		/* 공통 적용*/
+		color:white;
+	}
+	h1.a{
+		background-color: green;
+	}
+	h3.a{
+		background-color: blue;
+	}
+	/*
+	h2{
+		color: red;
+	}
+	h4{
+		color: red;
+	}
+	h5{
+		color: red;
+	}
+	h6{
+		color: red;
+	}*/
+	/*
+	   통합 : 여러개 태그를 동시에 적용 
+	   태그명1,태그명2,...{
+		   
+	   }
+	   class명 , id명 ....{
+		   
+	   }
+	   속성 선택자 
+	   input[type="button"],
+	*/
+	h2,h4,h5,h6{
+		color: red;
+	}
+</style>
+</head>
+<body>
+  <h1 class="a">Hello CSS</h1><!-- 글자 : white , background : green-->
+  <h3 class="a">Hello CSS</h3><!-- 글자 : white , background : blue-->
+  <h2>Hello CSS</h2><!-- color:red--> 
+  <h4>Hello CSS</h4><!-- color:red--> 
+  <h5>Hello CSS</h5><!-- color:red--> 
+  <h6>Hello CSS</h6><!-- color:red--> 
+</body>
+</html>

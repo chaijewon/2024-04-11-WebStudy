@@ -1,0 +1,79 @@
+<!--
+	  자손 선택자 / 후손 선택자 =>  크롤링 / JavaScript  
+	  ===================
+	    div > p : 자손 
+	    div p : 후손 
+	    
+	  반응 선택자 
+	    태그명:hover , 태그명:acvite 
+	    ==========
+	  상태 선택자 
+	    checked / focus / enabled / disabled 
+	    =======  ======  ================== button
+	              text
+	    | chechbox  
+	    
+	    태그명:checked  , 태그명:focus , 태그명:enabled , 태그명:disabled 
+	  
+	  구조 선택자 
+	    first-child / last-child / nth-child(수열) 
+	    ===========   ==========   =========  5n+4 
+	    메뉴 => 첫번째   메뉴 => 마지막    위치 
+	    
+	    4n+3
+	     n=0   => 3  4+3  8+3
+	    =====================
+	      1    2    3    4
+	    =====================
+	      5    6    7    8
+	    =====================
+	      9  10   11    12
+	    =====================
+	     13  14   15   16
+	    =====================
+	    
+	  동위 선택자 
+	  ========
+	  
+	      div 
+	       |
+	   ====================
+	   |      |     |     |
+	  p      h1    span  span     div > span  => div > h1+span
+	                                                   ======= 
+	                                             div > h1~span
+	                                                   =======
+	         div
+	          |
+	    ===============================
+	    |      |     |     |          |
+	    p    h1(1)  h1(2) h1(3)     span
+	                                  |
+	                                 h1(4)
+	    div h1 => 1 2 3 4
+	    div > h1 => 1 2 3
+	    div > p+h1 => 1
+	          <th></th>  th+td 
+	          <td></td>
+	    div > p~h1 => 1 2 3
+	    div > span > h1 ==> 4
+	    
+	    문자 선택자 
+	    ::after
+	    ::before
+	    =======================================
+	    SELECTOR : 태그 찾기 => 필요한 CSS를 적용 
+	    
+	    
+	     
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
