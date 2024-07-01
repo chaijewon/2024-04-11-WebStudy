@@ -1,0 +1,63 @@
+<!--
+	  1. 단위 
+	     px / % / em
+	              배수단위 
+	          백분율 단위
+	  2. 색상 단위
+	     background-color:red
+	     background-color:rgb(255,255,200)
+	     background-color:#F0F (255,0,255)
+	  3. URL단위 
+	     background:url('경로명')
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	p:nth-child(1){
+		background-color: red;
+	}
+	p:nth-child(2){
+		/*font-size: 100%;*/
+		font-size: 1.0em;
+		background-color: rgb(135, 225, 248);
+	}
+	p:nth-child(3){
+		/*font-size: 150%;*/
+		font-size: 1.5em;
+		background-color: rgb(255,0,0);
+	}
+	p:nth-child(4){
+		/*font-size: 200%;*/
+		font-size: 2.0em; /* 배수 : 14px => 2.0*14 */
+		background-color: #FF0000;
+	}
+	div{
+		/* width/height 설정*/
+		width: 500px;
+		height: 500px;
+		background-image: url('ico_user.png');
+		background-repeat: no-repeat;/*반복하지 않는다 = tile*/
+		/*background-size: cover;*/
+		
+		
+	}
+	h1{
+		color: white;
+		padding-left: 100px;
+		padding-top: 250px;
+	}
+</style>
+</head>
+<body>
+  <p>김하성, 보스턴전서 2루타로 9경기 연속 안타</p>
+  <p>부상 모면한 오타니, '파울볼 맨손 캐치' 배트보이</p>
+  <p>사우디는 1750억원도 준다는데..토트넘이 이럴 줄</p>
+  <p>승리하고도 '분노 폭발'...상대 감독이 밀치자</p>
+  <div>
+	  <h1>Hello Background</h1>
+  </div>
+</body>
+</html>
