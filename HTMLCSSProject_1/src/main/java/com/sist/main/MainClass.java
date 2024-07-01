@@ -1,5 +1,9 @@
 package com.sist.main;
 
+import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -61,10 +65,29 @@ public class MainClass {
 				    vo.setPoster(poster.get(j).attr("src"));
 				    vo.setState(state);
 				    vo.setIdcrement(Integer.parseInt(id));
+				    vo.setKey(youtubeKey(title.get(j).text()));
 				    dao.musicInsert(vo);
 				}
 			}
 		}catch(Exception ex){}
 	}
-
+    public String youtubeKey(String title)
+    {
+    	String result="";
+    	try
+    	{
+    		String url="https://www.youtube.com/results?search_query="+URLEncoder.encode(title,"UTF-8");
+    		Document doc=Jsoup.connect(url).get();
+    		Pattern p=Pattern.compile("/watch\\?v=[^가-힣]+");
+    		Matcher m=p.matcher(doc.toString());
+    		while(m.find())
+    		{
+    			String s=m.group();
+    			s=s.substring(s.indexOf("=")+1,s.indexOf("\""));
+    			result=s;
+    			break;
+    		}
+    	}catch(Exception ex){}
+    	return result;
+    }
 }

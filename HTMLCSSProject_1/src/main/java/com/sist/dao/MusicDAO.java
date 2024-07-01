@@ -54,7 +54,7 @@ public class MusicDAO {
 	   {
 		   getConnection();
 		   String sql="INSERT INTO genie_music VALUES("
-				     +"gm_mno_seq.nextval,?,?,?,?,?,?)";
+				     +"gm_mno_seq.nextval,?,?,?,?,?,?,?)";
 		   ps=conn.prepareStatement(sql);
 		   ps.setString(1, vo.getTitle());
 		   ps.setString(2, vo.getSinger());
@@ -62,7 +62,7 @@ public class MusicDAO {
 		   ps.setString(4, vo.getPoster());
 		   ps.setString(5, vo.getState());
 		   ps.setInt(6, vo.getIdcrement());
-		   
+		   ps.setString(7, vo.getKey());
 		   ps.executeUpdate();
 	   }catch(Exception ex)
 	   {
@@ -79,7 +79,7 @@ public class MusicDAO {
 	   try
 	   {
 		   getConnection();
-		   String sql="SELECT mno,state,idcrement,poster,title,singer "
+		   String sql="SELECT mno,state,idcrement,poster,title,singer,key "
 				     +"FROM genie_music "
 				     +"ORDER BY mno";
 		   ps=conn.prepareStatement(sql);
@@ -93,6 +93,7 @@ public class MusicDAO {
 			   vo.setPoster(rs.getString(4));
 			   vo.setTitle(rs.getString(5));
 			   vo.setSinger(rs.getString(6));
+			   vo.setKey(rs.getString(7));
 			   list.add(vo);
 		   }
 		   rs.close();

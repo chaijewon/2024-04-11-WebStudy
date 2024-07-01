@@ -14,20 +14,54 @@
 <style type="text/css">
  table{
    margin: 0px auto;
-   width: 800px;
+   width: 880px;
  }
  h1{
    text-align: center;
  }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#keyword').keyup(function(){
+		let sel=$('#sel').val();
+		
 		let k=$('#keyword').val();
 		$('#user-table > tbody > tr').hide();
-		let temp=$('#user-table > tbody > tr > td:nth-child(5n+4):contains("'+k+'")');
-		$(temp).parent().show()
+		if(sel=='곡명')
+		{
+		    let temp=$('#user-table > tbody > tr > td:nth-child(5n+4):contains("'+k+'")');
+		    $(temp).parent().show()
+		}
+		else
+		{
+			let temp=$('#user-table > tbody > tr > td:nth-child(5n+5):contains("'+k+'")');	
+			$(temp).parent().show()
+		}
+		
+	})
+	$('img').hover(function(){
+		$(this).css("width","100px").css("height","100px");
+	},function(){
+		$(this).css("width","30px").css("height","30px");
+	})
+	
+	$('.dataTr').click(function(){
+		let key=$(this).attr("key-data");
+		console.log(key)
+		let key1=$('#movie').attr("src","http://youtube.com/embed/"+key)
+		let title=$('#dialog').attr("title",$(this).attr("title-data"))
+		$('#dialog').dialog({
+					autoOpen:false,
+					resizable:false,
+					modal:true,
+					width:510,
+					height:500
+				}).dialog('open')
+		
 	})
 })
 </script>
@@ -37,6 +71,10 @@ $(function(){
    <table class="table_content">
      <tr>
       <td>
+       <select id="sel">
+         <option>곡명</option>
+         <option>가수</option>
+       </select>
        <input type=text size=25 id=keyword>
       </td>
      </tr>
@@ -56,7 +94,7 @@ $(function(){
         for(MusicVO vo:list)
         {
      %>
-            <tr>
+            <tr class="dataTr" key-data="<%=vo.getKey()%>" title-data="<%=vo.getTitle()%>">
               <td width="10%" align="center"><%= vo.getMno() %></td>
               <td width="10%" align="center">
               
@@ -80,5 +118,9 @@ $(function(){
      %>
      </tbody>
    </table>
+   <div id="dialog" title="Basic dialog" style="display: none">
+    <embed src="" id="movie" width=470 height=420></embed>
+   </div>
+ 
 </body>
 </html>
