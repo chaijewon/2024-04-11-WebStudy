@@ -90,6 +90,8 @@ public class GoodsDAO {
 	  return list;
   }
   // 상세보기 => CSS를 적용   ======> ?no=1
+  // public FoodEntity findByFno(int fno);
+  // public GoodsVO findByNo(int no);
   public GoodsVO goodsDetailData(int no)
   {
 	  GoodsVO vo=new GoodsVO();
