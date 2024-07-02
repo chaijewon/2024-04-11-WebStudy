@@ -1,0 +1,52 @@
+<!--
+	  위치 속성 공식 
+	  position(absolute|relative|fixed)
+	           => static 
+	  static : HTML코딩 순서로 배치
+	  => 1차 : CSS 위치 지정 
+	          =========== 팀별
+	     = HTML / CSS 
+	  absolute : 원하는 위치에 태그 배치 => 좌표(브라우저) 
+	             직접 배치 (top|left|bottom|right)
+	  relative : 이전태그 위치를 참조 배치 (위에 있는 태그)
+	             <img><img> :
+	             <div>
+					  <img>
+				 </div>
+				 Layout => 화면 구도 / 지도 이미지
+	 fixed : 고정 좌표 : 메뉴 , 쿠키 출력 
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.content{
+		width: 600px;
+	}
+	#image{
+		position: fixed;
+		top:10px;
+		right: 350px;
+		width: 300px;
+		height: 200px;
+	}
+</style>
+</head>
+<body>
+   <img src="base.jpg" id="image">
+   <div class="content">
+	   <p>
+		   2021년 메이저리그에 입성한 김하성의 4~9월까지 월간 통계를 보면 7월 성적이 가장 좋다. 
+		   7월 통산 63경기에 출전해 타율 0.304, 7홈런, 26타점, 33득점, 출루율 0.391, 
+		   장타율 464, OPS 0.855를 마크했다.
+
+           특히 김하성의 방망이는 작년 여름이 가장 뜨거웠다. 24경기에 출전해 타율 0.337, 
+           5홈런, 9타점, 21득점, OPS 0.999를 올렸다. 
+           타율과 OPS가 김하성의 월간 단위 중 역대 최고치다. 
+           당시 김하성은 샌디에이고 타선의 리드오프로 맹활약 중이었다.
+	   </p>
+   </div>
+</body>
+</html>

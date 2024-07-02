@@ -1,0 +1,91 @@
+<!--
+	  194page => 위치 속성
+	  ================== 좌표점 (setBounds())
+	   = float => 위치 지정 (left|right)
+	   = z-index => 레이어 (출력 순위) => 값이 높을 수 록 위로 올라온다 (CardLayout)
+	   = clear : float속성을 해제 
+	   = position 
+	     => absolute : 절대좌표 : 지도 
+	     => relative : 상대좌표 
+	     => fixed : 고정좌표 => 메뉴 , 쿽메뉴 ... 이미지
+	     => static : 소스 순서대로 배치 (default) 
+	   => 위치 지정 
+	      top 
+	      left
+	      right
+	      bottom 
+	      
+	      =========================
+	               | top
+	            ========
+	           
+          ===> left       <====right	            
+	            
+	            ========
+	               | bottom
+	      =========================
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		position: absolute;
+	}
+	.box:nth-child(1){
+		background-color: red;
+		left:10px;
+		top:10px;
+		z-index: 100; /* 순서 변경 */
+		/* 
+		   부메뉴 (span)
+		   ===========
+		   실시간 채팅 
+		   1차 => : 통합로그인 => SSO 라이브러리 
+		         Oracle => SQL (주력)
+		         JSP => MVC (흐름 : 처리)
+		         ===    ===
+		                | HTML과 Java를 분리
+	             | HTML+Java  
+	             => 흐름 파악 (Get / Post)=> 데이터 주고 받기 
+	                                      파일명?키=값 
+	                                      ====   ==  파일에 값을 전송 
+	                                      =========
+	                                        요청  ====> 자바 (오라클 연결)
+	             => Front : Jquery (Ajax) => 유지보수 
+	                        =============
+	                        | 차세대 개발 : Vue , React => 통합 (next)
+	                                     ===   =====
+	                                      2       3
+	         최근 업체 추천 
+	         =========== Spring (Back-end) => AI => 95% 
+	                             + React / Vue 
+	                     ====================== Full Stack 
+	                     Front => NodeJS (서버 사이드)
+	                              ================ 오라클 (SQL)
+		*/
+	}
+	.box:nth-child(2){
+		background-color: green;
+		left:50px;
+		top:50px;
+		z-index: 10;
+	}
+	.box:nth-child(3){
+		background-color: blue;
+		left:90px;
+		top:90px;
+		z-index: 1;
+	}
+</style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+</html>
