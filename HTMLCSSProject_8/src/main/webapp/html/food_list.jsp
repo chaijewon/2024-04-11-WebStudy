@@ -29,6 +29,26 @@
     	vo.setPoster(img);
     }
     int totalpage=dao.foodTotalPage(); // 총페이지 
+    
+    // 페이지 처리 
+    final int BLOCK=10;
+    int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+    //               (10-1)/10*10 => 0  9/10
+    //                (20-1)/10*10 => 10
+    //                  19/10(1)*10 => 11
+    int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+    if(endPage>totalpage)
+    	endPage=totalpage;
+    /*
+         < 1 2 3 4 5 6 7 8 9 10 >
+           |                  |
+          startPage          endPage 
+           curpage: 현재페이지  
+           1~10  startPage = 1
+                 endPage=10
+           11~20  startPage=11
+                  endPage=20
+    */
 %>
 <!DOCTYPE html>
 <html>
@@ -61,7 +81,7 @@
 	     <div class="col-sm-3">
 		     <div class="thumbnail"><!-- 이미지 카드: 이미지+제목 -->
 		      <a href="#">
-		       <img src="<%= vo.getPoster() %>" style="width: 100%" class="img-rounded"><!-- height는 자동 설정 -->
+		       <img src="<%= vo.getPoster() %>" style="width:240px;height: 200px" class="img-rounded"><!-- height는 자동 설정 -->
 		       <p class="a"><%=vo.getName() %></p>
 		      </a>
 		     </div>
@@ -74,18 +94,30 @@
    <div class="row">
      <div class="text-center"><!-- 가운데 정렬 : text-left , text-right , text-center  -->
        <ul class="pagination">
-         <li><a href="#">&lt;</a></li>
-         <li class="active"><a href="food_list.jsp?page=1">1</a></li>
-         <li><a href="food_list.jsp?page=2">2</a></li>
-         <li><a href="food_list.jsp?page=3">3</a></li>
-         <li><a href="food_list.jsp?page=4">4</a></li>
-         <li><a href="food_list.jsp?page=5">5</a></li>
-         <li><a href="food_list.jsp?page=6">6</a></li>
-         <li><a href="food_list.jsp?page=7">7</a></li>
-         <li><a href="food_list.jsp?page=8">8</a></li>
-         <li><a href="food_list.jsp?page=9">9</a></li>
-         <li><a href="food_list.jsp?page=10">10</a></li>
-         <li><a href="#">&gt;</a></li>
+         <%
+             if(startPage>1)
+             {
+         %>
+         <li><a href="food_list.jsp?page=<%=startPage-1%>">&lt;</a></li>
+         <%
+             }
+         %>
+         <%
+             for(int i=startPage;i<=endPage;i++)
+             {
+         %>
+         <li class="<%= curpage==i?"active":""%>"><a href="food_list.jsp?page=<%=i%>"><%=i %></a></li>
+         <%
+             }
+         %>
+         <%
+            if(endPage<totalpage)
+            {
+         %>
+         <li><a href="food_list.jsp?page=<%=endPage+1%>">&gt;</a></li>
+         <%
+            }
+         %>
        </ul>
      </div>
    </div>
