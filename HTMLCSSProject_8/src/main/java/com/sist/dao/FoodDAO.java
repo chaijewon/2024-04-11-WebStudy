@@ -84,6 +84,75 @@ public class FoodDAO {
 	   }
 	   return total;
    }
+   // 상세보기 
+   /*
+    *   private int fno;
+        private String name,type,phone,address,theme,poster,content;
+        private double score;
+        
+        
+        1. 데이터설계 => DDL(CREATE , ALTER , RENAME , DROP,TRUNCATE)
+        2. 프로그램 구현 
+             SELECT : 목록 출력 / 상세보기 / 데이터 검색
+                      ======           ========
+                        |                 |
+                        =================== 페이징 (인라인뷰)
+                      => 예약 / 구매 => JOIN / SUBQUERY 
+                         사용자 ====== 맛집
+                                |
+                               예약 (매핑테이블)
+             UPDATE : 조회수 증가 / 찜 증가 / 좋아요 증가 
+             DELETE : 회원탈퇴 / 구매취소 , 예약취소 
+             INSERT : 회원가입 / 장바구니 / 예약  
+             =====> DML
+                          
+    */
+   public FoodVO foodDetailData(int fno)
+   {
+	   FoodVO vo=new FoodVO();
+	   try
+	   {
+		   conn=dbConn.getConnection();
+		   String sql="UPDATE food_house SET "
+				     +"hit=hit+1 "
+				     +"WHERE fno=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, fno);
+		   ps.executeUpdate();
+		   ////////////////////////////// 조회수 증가 
+		   sql="SELECT fno,name,type,phone,address,theme,poster,content,score "
+			  +"FROM food_house "
+		      +"WHERE fno=?";
+		   ps=conn.prepareStatement(sql);
+		   // ?에 값을 채운다 
+		   ps.setInt(1, fno);
+		   // 실행 요청 => 결과값 받기
+		   ResultSet rs=ps.executeQuery();
+		   // 커서를 데이터 출력된 위치로 이동 
+		   rs.next();
+		   vo.setFno(rs.getInt(1));
+		   vo.setName(rs.getString(2));
+		   vo.setType(rs.getString(3));
+		   vo.setPhone(rs.getString(4));
+		   vo.setAddress(rs.getString(5));
+		   vo.setTheme(rs.getString(6));
+		   vo.setPoster(rs.getString(7).replace("https", "http"));
+		   vo.setContent(rs.getString(8));
+		   vo.setScore(rs.getDouble(9));
+		   // 메모리 닫기
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   System.out.println("=====foodDetailData() 오류=====");
+		   ex.printStackTrace();
+       }
+	   finally
+	   {
+		  // 오라클 연결 해제
+		  dbConn.disConnection(conn, ps);
+	   }
+	   return vo;
+   }
 }
 
 

@@ -80,7 +80,7 @@
    %>
 	     <div class="col-sm-3">
 		     <div class="thumbnail"><!-- 이미지 카드: 이미지+제목 -->
-		      <a href="#">
+		      <a href="food_detail.jsp?fno=<%=vo.getFno()%>"><!-- 화면 이동 : 상세보기 -->
 		       <img src="<%= vo.getPoster() %>" style="width:240px;height: 200px" class="img-rounded"><!-- height는 자동 설정 -->
 		       <p class="a"><%=vo.getName() %></p>
 		      </a>
