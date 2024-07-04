@@ -1,0 +1,218 @@
+<!--
+	  => 순서 (알고리즘)
+	  => 흐름 파악 => 요청 / 응답 
+	              ====  ====
+	              브라우저 서버 (DAO => SQL)
+	  => 분석 : 라이브러리 => 개발에 맞는지 (오버라이딩)
+	  => 자바 (객체지향프로그램 => 3개특성) => 개념 (면접)
+	  => 반복 / 숙달 
+	  => 개념 / 프로그램 (기술)
+	  ======================================== 스프링 개념  
+	  1. 태그 + 속성
+	     텍스트 관련 
+	       => ***<font> : 색상지정 , 크기  , 글꼴  => CSS로 변경 
+			   => <font color="" size="" face="">
+				        ======== =======
+				                 | px => em(배수)
+				        | #FFF , rgb() , 지정된 색상 (red,blue)
+		   => <u> : underline 
+		   => <em> : 강조체 
+		   => ***<strong> : 강조체 
+		   => ***<b> : 굵은체 
+		   => ***<h1>~<h6> :  제목 => block + bold 
+		   => **<sup> : 위첨자 => 새글 new
+		   => ***<p> : 단락 
+		   => ***<br> : 줄바꿈 
+		   => **<pre> : 입력된 상태로 그대로 출력 : 내용 / 줄거리 
+			    => style , id , class 
+	     멀티미디어 관련 
+	       => ***<img> 
+	           => 속성 
+	              src="파일명"
+	              width/height
+	              class 
+	              title="풍선도움말"
+	       => <embed>
+	           => 동영상 출력 
+	           => src="동영상파일"
+	           => width/height
+	      화면이동 
+	        => ***<a> : GET방식만 사용이 가능 
+				=> 속성 
+				   href="이동할 파일명" => 데이터 전송 => 파일명?변수=값
+				                                  ==========
+				                                  ?앞에 있는 파일에서 값을 받는다 
+				   target="_self" "_blank"
+				                   => 새로운 브라우저 
+				          => 현재 화면 
+		   목록 출력
+		     => ***<ul> => 메뉴 => style="list-type:none"
+				   <ul>
+					 |
+					<li> => 실제 출력하는 데이터
+			 => ***<table> => 제목이 있는 목록 출력 / 장바구니 , 게시판 ...
+				     |
+				    <tr>
+					 |
+			      =========
+			      |       |
+			     <th>    <td>
+			     제목      실제 데이터  
+			     => 속성 : table => width
+			     => tr => height
+			     => td|th => width,align,valign
+			                             ====== top|middle|bottom
+			                                        ====== default
+			                       ====== left|center|right
+			                              ===== default
+				     
+			 => <ol>
+				 |
+				<li>
+			 => <dl> => 외부 : 상세보기 
+				 |
+			==========
+			|        |
+		   <dt>     <dd> 
+		   입력관련 
+		    ======================
+		     => <input>
+		           type="" 
+		           ***type="text" :  한줄 문자열
+		           ***type="password" : 비밀번호 
+		           type="radio"    : 라디오 버튼 => 한개 선택 
+		           type="checkbox" :  여러개 동시 선택 => 멀티조건 검색
+		           type="number" : 숫자로 표시 => Spinner
+		           type="range" : Slider
+		           type="file" : 자료실 => 파일업로드 / 다운로드 
+		           type="date" : 생년월일 => 예약 (직접 달력)
+		           type="color"
+		           ***type="button" : 기능이 없다 => 반드시 자바스크립트에서 처리
+		           ***type="submit" : 데이터 전송 => <form>을 이용한다
+		           ***type="image" : submit버튼 
+		     => <select> :  콤보박스 
+				   |
+				 <option selected value=""> => 데이터 저장 
+			 => <textarea> => 여러줄 입력 
+				  => <textarea></textarea>
+		    ====================== <form> 입력된 데이터를 모아서 해당 파일에 전송 
+				                   =======
+				                   GET/POST => 선택 => HTML태그는 GET
+			 => <button> : 데이터 전송버튼 (submit)
+				<button>로그인</button>
+		   화면 분할 
+		     => <div> : 화면 분할 
+				<span> : 부분적으로 CSS를 적용 , 부메뉴 
+		  ============================================================
+		     block  : <p> <br> <div> <ul> <table> <h1>~<h6>
+		     inline : <b> , <input> <textarea> <select> , <font> ...
+	  2. CSS
+	     선택자 => 디자인할 태그를 선택 , 이벤트 처리(자바스크립트) , Jsoup (크롤링)
+	      * : 전체선택자 => margin / padding / font-family
+	      태그명 , 구분자 (id,class)
+	                      | 중복허용 ==> .클래스명 
+	                   | 중복없이 ==> #아이디명
+	      속성선택자 : 이미지 (경로) => jpg | png | gif | href 
+	               태그명[속성명=값] ==> equals
+	               태그명[속성명^=값] ==> startsWith
+	               태그명[속성명$=값] ==> endsWith
+	               태그명[속성명*=값] ==> contains
+	      자손 , 후손 , 동위 선택자 (th + td , dt + dd)
+	              div         ================== 구분하지 않는다 
+	               |
+	           ==================
+	           |    |    |      |
+	           p    h1  span  span  ==> 자손  => div > h1 (동의 선택자 => h1+span h1~span) 
+	                                                                         | 옆에 있는 모든 태그
+	                            |                                      |옆에 있는 태그 
+	                           h1   ==> 후손  => div span h1 
+	                                        => div h1
+	                                    
+	                                  ==> HTML은 트리형태의 구조 
+	                                           =========== DOM (Document Object Model)
+	                                           => JavaScript => DOMScript
+	                                           => 태그를 제어하는 프로그램
+	     상태 선택자 : <input> 
+	       태그(ID|CLASS):checked => type=radio , type=checkbox
+	       :focus => type=text , type=button 
+	       :enabled => type=text , type=button : 활성화 
+	       :disabled => type=text , type=button : 비활성화
+	     구조선택자 => 목록 (ul/table)
+	       :first-child => 첫번째
+	       :last-child  => 두번째
+	       :nth-child(수열)=> 원하는 위치 => 2n(even) 2n+1(odd)
+	     문자선택자 
+	       ::before 
+	       ::after 
+	     속성  
+	      => 텍스트 속성 
+	         font-family : 글꼴 
+	         font-size : 크기 (px,em)
+	         font-wegiht:bold
+	         color: 글자색상 
+	         text-align : 정렬 (left|right|center)
+	         text-decoration: 라인선 
+	                          => none / underline / overline 
+	         white-space : 줄바꿈 
+	         word-spacing : 글자 간격 
+	         line-height : 줄 간격(자간) 
+	      => ul/li ol/li
+	         list-style 
+	      => background 
+	          background-image:url('파일명')
+	                           repeat : 반복(디폴트) => no-repeat
+	          background-size : width,height 
+	                            cover : 축소/확대
+	          background-color
+	      => border 
+	         border-width : 두께
+	         border-style : 선의 종류 => solid / dotted / dashed / double 
+	         border-color : 색상 
+	         =======================
+	         border: => 순서와 상관이 없다 
+	      => display : 가시성 
+	                   none | block | inline | inline-block(width/height지정)
+	      => margin : 태그와 태그사이의 여백 
+	           margin-left 
+	           margin-right
+	           margin-top
+	           margin-bottom
+	           margin: top right bottom left
+	                   =====================
+	      => padding : 태그안에 글자 , 이미지에 대한 여백 
+	           padding-left 
+	           padding-right
+	           padding-top
+	           padding-bottom
+	           padding: top right bottom left
+	      => position 
+	           static : 코딩 순서로 배치 (default)
+	           absolute : 절대좌표 => 브라우저 좌표 사용 
+	           relative : 상대좌표 => 지정 태그의 위치 좌표 
+	                      ===== top / left / right / bottom
+	           fixed : 고정좌표 
+	      => 기타 
+	         z-index : 레이어 => 숫자 높을수록 위로 배치 
+	         float : left|right 
+	           => 반드시 해제 => clear:both => 통합 
+	           
+	      => @media screen and (max-width:960)
+	      {
+			  => 해상도에 따라 크기 변경이 가능 => 반응형 웹 
+			  => 모바일에서도 사용이 가능 
+			  => 최근에는 앱을 만들어서 처리 
+			  => 웹 : www
+			  => 앱 : m
+		  }
+	  
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
