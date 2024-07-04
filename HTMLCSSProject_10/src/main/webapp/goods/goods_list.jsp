@@ -42,9 +42,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
-	.container-fluid{
+	.container{
 		margin-top:50px;
 	}
 	.row{
@@ -57,16 +60,44 @@
 	    text-overflow: ellipsis;
 	}
 </style>
+<script type="text/javascript">
+$(function(){
+	$('.bclick').click(function(){
+		let sel=$('#sel').val();
+		let fd=$('#fd').val();
+		if(fd=='')
+		{
+			$('#fd').focus();
+			return;
+		}
+		
+		$.ajax({
+			type:'post',
+			url:'goods_find.jsp',
+			data:{"sel":sel,"fd":fd},
+			success:function(result)
+			{
+				$('#dialog').html(result);
+				$('#dialog').dialog({
+					autoOpen:false,
+					modal:true,
+					width:800,
+					height:600
+				}).dialog("open");
+			}
+		})
+	})
+})
+</script>
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container">
    <div class="row">
-       <select name="sel" class="input-sm">
-         <option value="all">전체</option>
-         <option value="name">상품명</option>
-         <option value="content">상품소개</option>
+       <select id="sel" class="input-sm">
+         <option value="goods_name">상품명</option>
+         <option value="goods_sub">상품소개</option>
        </select>
-       <input type="text" name="fd" size=20 class="input-sm">
+       <input type="text" id="fd" size=20 class="input-sm">
        <input type="button" value="검색" class="btn-sm btn-danger bclick">
    </div>
    <div style="height: 10px"></div>
@@ -125,6 +156,9 @@
         </ul>
       </div>
    </div>
+  </div>
+  <div id="dialog" title="검색 결과">
+   
   </div>
 </body>
 </html>

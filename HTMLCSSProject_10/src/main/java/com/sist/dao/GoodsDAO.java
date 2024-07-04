@@ -136,4 +136,35 @@ public class GoodsDAO {
 	  }
 	  return vo;
   }
+  public List<GoodsVO> goodsFindData(String sel,String fd)
+  {
+	  List<GoodsVO> list=new ArrayList<GoodsVO>();
+	  try
+	  {
+		  conn=dbConn.getConnection();
+		  String sql="SELECT no,goods_poster,goods_name,rownum "
+				    +"FROM goods_all "
+				    +"WHERE "+sel+" LIKE '%'||?||'%'";
+		  ps=conn.prepareStatement(sql);
+		  ps.setString(1, fd);
+		  ResultSet rs=ps.executeQuery();
+		  while(rs.next())
+		  {
+			  GoodsVO vo=new GoodsVO();
+			  vo.setNo(rs.getInt(1));
+			  vo.setPoster(rs.getString(2));
+			  vo.setName(rs.getString(3));
+			  list.add(vo);
+		  }
+		  rs.close();
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  dbConn.disConnection(conn, ps);
+	  }
+	  return list;
+  }
 }
