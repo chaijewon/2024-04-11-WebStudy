@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.sist.dao.*"%>
+    pageEncoding="UTF-8" import="com.sist.dao.*,java.util.*"%>
 <%--
       food_detail.jsp?fno=1
                       ===== 맛집 1번에 상세보기 요청
@@ -13,6 +13,7 @@
     String fno=request.getParameter("fno");
     FoodVO vo=dao.foodDetailData(Integer.parseInt(fno));
     //     == vo에 저장된 데이터를 출력 => 상세보기 
+    List<FoodVO> list=dao.foodTop5();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,6 +22,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+*{
+   font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
 	.container{
 		margin-top:50px;
 	}
@@ -32,11 +40,11 @@
 </head>
 <body>
   <div class="container">
-    <div class="row">
+    <div class="col-sm-8">
       <table class="table table-striped">
        <tr>
          <td width="30%" class="text-center" rowspan="7">
-           <img src="<%=vo.getPoster() %>" style="width: 100%" class="img-rounded">
+           <img src="<%=vo.getPoster() %>" style="width: 100%; height: 130%" class="img-rounded">
          </td>
          <td colspan="2"><h3><%=vo.getName() %></h3></td>
        </tr>
@@ -79,8 +87,39 @@
         </tr>
       </table>
     </div>
+    <div class="col-sm-4">
+      <table class="table">
+         <caption><h3>인기 맛집</h3></caption>
+        <tr>
+         <td>
+           <%
+               for(FoodVO fvo:list)
+               {
+           %>
+                  <table class="table">
+                    <tr>
+                      <td width="30%" class="text-center" rowspan="3">
+                        <img src="<%=fvo.getPoster() %>" style="width:100%" class="img-circle">
+                      </td>
+                      <td width=70%><%=fvo.getName() %></td>
+                    </tr>
+                    <tr>
+                      <td><%=fvo.getType() %></td>
+                    </tr>
+                    <tr>
+                      <td>평점&nbsp;<%=fvo.getScore() %>점</td>
+                    </tr>
+                  </table>
+           <%
+               }
+           %>
+         </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </body>
 </html>
 
 
+           

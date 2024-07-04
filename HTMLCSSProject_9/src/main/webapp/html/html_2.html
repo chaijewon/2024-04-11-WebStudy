@@ -1,0 +1,65 @@
+<!--
+    position : relative , absolute 	
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.container{
+		width: 300px;
+		height: 300px;
+		border: 1px solid #CCC;
+		position: relative;/* 좌표점을 div.container안에 있는 좌표를 이용해라*/
+	}
+	.box{
+		width: 50px;
+		height: 50px;
+		background-color: blue;
+		position: absolute;
+	}
+	.a{
+		 top:0;
+		 left:0;
+	}
+	.b{
+		 top:0;
+		 right:0;
+	}
+	.c{
+		 bottom:0;
+		 left:0;
+	}
+	.d{
+		 bottom:0;
+		 right:0;
+	}
+	.e{
+		 top:100px;
+		 left:100px;
+	}
+</style>
+</head>
+<body>
+  <div class="container">
+	  <div class="box a"></div><!-- class : 공통으로 적용되는 CSS가 존재 -->
+	  <div class="box b"></div><!-- class: 이름을 여러개 사용이 가능 id는 이름을 한개만 사용-->
+	  <!--
+		  <div class="a" class="b" class="c"></div> => 적용할 수 없다 
+		    => 한개의 태그에 같은 속성을 사용할 수 없다 
+		  자바 
+		    class div
+		    {
+				String class=""
+			}  
+			=> 태그 : 클래스 
+			   속성 : 멤버변수 
+		    => <div class="a b c">
+	  -->
+	  <div class="box c"></div>
+	  <div class="box d"></div>
+	  <div class="box e"></div>
+  </div>
+</body>
+</html>

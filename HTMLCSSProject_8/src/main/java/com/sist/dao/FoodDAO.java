@@ -153,6 +153,39 @@ public class FoodDAO {
 	   }
 	   return vo;
    }
+   public List<FoodVO> foodTop5()
+   {
+	   List<FoodVO> list=new ArrayList<FoodVO>();
+	   try
+	   {
+		   conn=dbConn.getConnection();
+		   String sql="SELECT fno,name,poster,type,score,rownum "
+				     +"FROM (SELECT fno,name,poster,type,score "
+				     +"FROM food_house ORDER BY hit DESC) "
+				     +"WHERE rownum<=5";
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   FoodVO vo=new FoodVO();
+			   vo.setFno(rs.getInt(1));
+			   vo.setName(rs.getString(2));
+			   vo.setPoster(rs.getString(3).replace("https", "http"));
+			   vo.setType(rs.getString(4));
+			   vo.setScore(rs.getDouble(5));
+			   list.add(vo);
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   dbConn.disConnection(conn, ps);
+	   }
+	   return list;
+   }
 }
 
 
