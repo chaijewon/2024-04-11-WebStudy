@@ -232,5 +232,23 @@ public class BoardDAO {
 	   return bCheck;
    }
    // 5. 삭제하기 => input
+   public boolean boardDelete(int no, String pwd)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   conn=dbConn.getConnection();
+		   
+	   }catch(Exception ex)
+	   {
+		   System.out.println("====== boardDelete(int no, String pwd) 오류 ======");
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   dbConn.disConnection(conn, ps);
+	   }
+	   return bCheck;
+   }
    // 6. 검색 => <select>
 }
