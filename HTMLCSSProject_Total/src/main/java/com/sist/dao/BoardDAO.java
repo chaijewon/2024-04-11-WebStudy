@@ -187,7 +187,7 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
-   
+   // CRUD => 데이터 관리  
    public boolean boardUpdate(BoardVO vo)
    {
 	   boolean bCheck=false;
@@ -238,7 +238,26 @@ public class BoardDAO {
 	   try
 	   {
 		   conn=dbConn.getConnection();
+		   String sql="SELECT pwd FROM board "
+				     +"WHERE no="+no;
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   String db_pwd=rs.getString(1);
+		   rs.close();
 		   
+		   if(db_pwd.equals(pwd))
+		   {
+			   bCheck=true;
+			   sql="DELETE FROM board "
+				  +"WHERE no="+no;
+			   ps=conn.prepareStatement(sql);
+			   ps.executeUpdate();
+		   }
+		   else
+		   {
+			   bCheck=false;
+		   }
 	   }catch(Exception ex)
 	   {
 		   System.out.println("====== boardDelete(int no, String pwd) 오류 ======");
