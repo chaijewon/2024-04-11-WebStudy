@@ -54,7 +54,7 @@ h3{
        </tr>
        <tr>
          <td colspan="4" class="text-right">
-          <a href="#" class="btn btn-xs btn-info">수정</a>
+          <a href="board_update.jsp?no=<%=no %>" class="btn btn-xs btn-info">수정</a>
           <a href="#" class="btn btn-xs btn-success">삭제</a>
           <a href="board_list.jsp" class="btn btn-xs btn-warning">목록</a>
          </td>
