@@ -25,7 +25,30 @@ public class DataInputServlet extends HttpServlet {
 		// 해제 => 메모리 => 새로운 화면 (new => 생성)
 		System.out.println("DataInputServlet:destory() Call...");
 	}
-
+    /*
+     *    클라이언트 요청 ================> request안에 첨부된다 (주고)
+     *    서버 요청 처리 => 응답 (HTML) =========> response (받고) 
+     *    
+     *    요청 : 전송하는 값 
+     *    응답 : 어떤 값을 출력 할지 ... (HTML)
+     *    
+     *    Client / Server 
+     *    
+     *    => <input> => name속성을 가지고 있어야 된다 
+     *    <form> 
+     *      => <input> , <select> , <textarea>
+     *    => <form> => 포함하고 있는 데이터만 넘어간다   
+     *    
+     *    <a href="이동할 주소">
+     *             ======== GET 
+     *             DataOutputServlet?name=홍길동
+     *             DataOutputServlet?name=홍길동&sex=남자
+     *                                        =
+     *             getParameter("name"), getParameter("sex")
+     *             
+     *    http://localhost/JSPBasicProject_2/DataOutputServlet?name=%EC%8B%AC%EC%B2%AD%EC%9D%B4&sex=%EC%97%AC%EC%9E%90&tel1=010&tel2=1111-1111&content=11111&hobby=%EC%97%AC%ED%96%89&hobby=%EC%98%81%ED%99%94
+     *    
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 브라우저에 알려준다 (메모리를 읽어간다 => HTML/XML/JSON)
 		// => 메모리에 저장된 내용을 읽어 간다 
@@ -39,7 +62,7 @@ public class DataInputServlet extends HttpServlet {
 		out.write("</head>");
 		out.write("<body>");
 		out.write("<center>");
-		out.write("<form method=\"post\" action=\"DataOutputServlet\">");
+		out.write("<form method=\"get\" action=\"DataOutputServlet\">");
 		/*
 		 *     RestFul => 다른 프로그램과 연동 
 		 *   method 
@@ -77,7 +100,9 @@ public class DataInputServlet extends HttpServlet {
 		out.write("</tr>");
 		out.write("<tr>");
 		out.write("<th width=20% class=\"tdright\">소개</th>");
-		out.write("<td width=80%><textarea rows=5 cols=30></textarea></td>");
+		out.write("<td width=80%><textarea rows=5 cols=30 name=content></textarea></td>");
+		// null => name속성이 없다 , name을 틀리게 => JSP / Spring 
+		// id,class=> CSS / JavaScript 
 		out.write("</tr>");
 		out.write("<tr>");
 		out.write("<th width=20% class=\"tdright\">취미</th>");
