@@ -58,11 +58,11 @@ public class DataInputServlet extends HttpServlet {
 		// out 영역에 HTML을 출력 => 브라우저가 읽어 간다 
 		out.write("<html>");
 		out.write("<head>");
-		out.write("<link rel=\"stylesheet\" href=\"table.css\">");
+		out.write("<link rel=\"stylesheet\" href=\"css/table.css\">");
 		out.write("</head>");
 		out.write("<body>");
 		out.write("<center>");
-		out.write("<form method=\"get\" action=\"DataOutputServlet\">");
+		out.write("<form method=\"post\" action=\"DataOutputServlet\">");
 		/*
 		 *     RestFul => 다른 프로그램과 연동 
 		 *   method 

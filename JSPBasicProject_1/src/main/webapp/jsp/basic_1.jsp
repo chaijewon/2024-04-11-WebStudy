@@ -213,7 +213,7 @@
 </head>
 <body>
   <%
-     int a=10/2;
+     out.write("<b>Hello</b>");
   %>
 </body>
 </html>
