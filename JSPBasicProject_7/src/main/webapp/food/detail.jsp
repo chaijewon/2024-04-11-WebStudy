@@ -103,7 +103,7 @@ $(function(){ // main => window.onload=function(){}
                          {
                       %>
                             <span class="btn btn-danger btn-xs updates" data-no="<%=rvo.getRno()%>">수정</span>
-                            <a href="../reply/delete.jsp?rno=<%=rvo.getRno() %>&fno=<%=rvo.getFno() %>" class="btn btn-primary btn-xs">삭제</a>
+                            <a href="../reply/delete.jsp?rno=<%=rvo.getRno() %>&fno=<%=rvo.getFno() %>&type=<%=rvo.getType() %>" class="btn btn-primary btn-xs">삭제</a>
                       <%
                          }
                       %>
@@ -116,6 +116,7 @@ $(function(){ // main => window.onload=function(){}
                    <tr style="display: none" class="ups" id="ups<%=rvo.getRno()%>">
 			          <td>
 			           <form method="post" action="../reply/update.jsp">
+			            <input type="hidden" name=type value="<%=rvo.getType()%>">
 			            <input type="hidden" name=fno value="<%=vo.getFno()%>">
 			            <input type="hidden" name=rno value="<%=rvo.getRno()%>">
 			            <textarea rows="4" cols="45" name="msg" style="float: left" required><%=rvo.getMsg() %></textarea>

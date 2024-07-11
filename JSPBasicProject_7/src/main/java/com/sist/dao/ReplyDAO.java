@@ -63,7 +63,7 @@ public class ReplyDAO {
 		try
 		{
 			conn=dbConn.getConnection();
-			String sql="SELECT /*+ INDEX_DESC(food_reply fr_rno_pk)*/rno,fno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
+			String sql="SELECT /*+ INDEX_DESC(food_reply fr_rno_pk)*/rno,fno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS'),type "
 					  +"FROM food_reply "
 					  +"WHERE fno="+fno+" and type="+type;
 			ps=conn.prepareStatement(sql);
@@ -77,6 +77,7 @@ public class ReplyDAO {
 				vo.setName(rs.getString(4));
 				vo.setMsg(rs.getString(5));
 				vo.setDbday(rs.getString(6));
+				vo.setType(rs.getInt(7));
 				list.add(vo);
 			}
 			rs.close();
