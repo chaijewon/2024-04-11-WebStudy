@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
 import com.sist.database.DataBaseConnection;
 
@@ -61,6 +62,23 @@ public class ReplyDAO {
 		try
 		{
 			conn=dbConn.getConnection();
+			String sql="SELECT /*+ INDEX_DESC(food_reply fr_rno_pk)*/rno,fno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
+					  +"FROM food_reply "
+					  +"WHERE fno="+fno;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				ReplyVO vo=new ReplyVO();
+				vo.setRno(rs.getInt(1));
+				vo.setFno(rs.getInt(2));
+				vo.setId(rs.getString(3));
+				vo.setName(rs.getString(4));
+				vo.setMsg(rs.getString(5));
+				vo.setDbday(rs.getString(6));
+				list.add(vo);
+			}
+			rs.close();
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -70,6 +88,25 @@ public class ReplyDAO {
 			dbConn.disConnection(conn, ps);
 		}
 		return list;
+	}
+	// 댓글 삭제 
+	public void replyDelete(int rno)
+	{
+		try
+		{
+			conn=dbConn.getConnection();
+			String sql="DELETE FROM food_reply "
+					  +"WHERE rno="+rno;
+			ps=conn.prepareStatement(sql);
+			ps.executeUpdate();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			dbConn.disConnection(conn, ps);
+		}
 	}
 	
 }
