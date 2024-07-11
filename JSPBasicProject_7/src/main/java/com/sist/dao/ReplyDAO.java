@@ -41,10 +41,10 @@ public class ReplyDAO {
 					  +"fr_rno_seq.nextval,?,?,?,?,?,SYSDATE)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, vo.getType());
-			ps.setInt(1, vo.getFno());
-			ps.setString(2, vo.getId());
-			ps.setString(3, vo.getName());
-			ps.setString(4, vo.getMsg());
+			ps.setInt(2, vo.getFno());
+			ps.setString(3, vo.getId());
+			ps.setString(4, vo.getName());
+			ps.setString(5, vo.getMsg());
 			
 			ps.executeUpdate();
 		}catch(Exception ex)

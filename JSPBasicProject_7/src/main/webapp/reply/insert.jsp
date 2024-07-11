@@ -5,7 +5,7 @@
     request.setCharacterEncoding("UTF-8");
     String fno=request.getParameter("fno");
     String msg=request.getParameter("msg");
-    
+    String type=request.getParameter("type");
     // 세션 생성 
     String id=(String)session.getAttribute("id");
     String name=(String)session.getAttribute("name");
@@ -18,10 +18,17 @@
     vo.setMsg(msg);
     vo.setId(id);
     vo.setName(name);
-    vo.setType(1);
+    vo.setType(Integer.parseInt(type));
     
     dao.replyInsert(vo);
     
     // 이동 
-    response.sendRedirect("../main/main.jsp?mode=1&fno="+fno);
+    if(vo.getType()==1)
+    {
+      response.sendRedirect("../main/main.jsp?mode=1&fno="+fno);
+    }
+    else 
+    {
+    response.sendRedirect("../main/main.jsp?mode=3&no="+fno);
+    }
 %>
