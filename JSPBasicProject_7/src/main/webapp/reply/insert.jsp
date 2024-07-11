@@ -18,6 +18,7 @@
     vo.setMsg(msg);
     vo.setId(id);
     vo.setName(name);
+    vo.setType(1);
     
     dao.replyInsert(vo);
     

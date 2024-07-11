@@ -38,8 +38,9 @@ public class ReplyDAO {
 		{
 			conn=dbConn.getConnection();
 			String sql="INSERT INTO food_reply VALUES("
-					  +"fr_rno_seq.nextval,?,?,?,?,SYSDATE)";
+					  +"fr_rno_seq.nextval,?,?,?,?,?,SYSDATE)";
 			ps=conn.prepareStatement(sql);
+			ps.setInt(1, vo.getType());
 			ps.setInt(1, vo.getFno());
 			ps.setString(2, vo.getId());
 			ps.setString(3, vo.getName());
@@ -56,7 +57,7 @@ public class ReplyDAO {
 		}
 	}
 	// 2. 데이터 읽기 
-	public List<ReplyVO> replyListData(int fno)
+	public List<ReplyVO> replyListData(int fno,int type)
 	{
 		List<ReplyVO> list=new ArrayList<ReplyVO>();
 		try
@@ -64,7 +65,7 @@ public class ReplyDAO {
 			conn=dbConn.getConnection();
 			String sql="SELECT /*+ INDEX_DESC(food_reply fr_rno_pk)*/rno,fno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
 					  +"FROM food_reply "
-					  +"WHERE fno="+fno;
+					  +"WHERE fno="+fno+" and type="+type;
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())

@@ -10,7 +10,7 @@
     // 나머지 데이터는 해당 JSP에서 처리 
     FoodVO vo=dao.foodDetailData(Integer.parseInt(fno));
     // 댓글목록 => fno
-    List<ReplyVO> list=rDao.replyListData(Integer.parseInt(fno));
+    List<ReplyVO> list=rDao.replyListData(Integer.parseInt(fno),1);
     
    
 %>
