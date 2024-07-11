@@ -108,5 +108,28 @@ public class ReplyDAO {
 			dbConn.disConnection(conn, ps);
 		}
 	}
+	// 댓글 수정 
+	public void replyUpdate(ReplyVO vo)
+	{
+		try
+		{
+			conn=dbConn.getConnection();
+			String sql="UPDATE food_reply SET "
+					  +"msg=? "
+					  +"WHERE rno=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, vo.getMsg());
+			ps.setInt(2, vo.getRno());
+			
+			ps.executeUpdate();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			dbConn.disConnection(conn, ps);
+		}
+	}
 	
 }
