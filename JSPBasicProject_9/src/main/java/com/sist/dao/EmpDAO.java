@@ -117,6 +117,33 @@ public class EmpDAO {
 	   }
 	   return list;
    }
+   /*
+    *      JOIN / SubQuery 
+    *      
+    *      JOIN 
+    *       => INNER JOIN 
+    *          Oracle 조인
+    *            SELECT A.col,B.col
+    *            FROM A,B
+    *            WHERE A.col=B.col 
+    *            AND 다른 조건 
+    *             
+    *          ANSI JOIN 
+    *            SELECT A.col,B.col
+    *            FROM A JOIN B
+    *            ON A.col=B.col
+    *            AND 다른 조건 
+    *            
+    *       SUBQUERY 
+    *         인라인뷰 => SELECT을 테이블 대체
+    *         SELECT ~
+    *         FROM (SELECT ~~) => 페이지를 나누는 경우 (rownum)
+    *         스칼라 서브쿼리 => SELECT문장에서 컬럼 대체 
+    *         SELECT 컬럼명,(SELECT ~~)
+    *                     ============ 무조건 컬럼 1개의 값을 처리
+    *         FROM table_name 
+    *         
+    */
    public EmpVO empDetailData(int empno)
    {
 	   EmpVO vo=new EmpVO();
@@ -152,5 +179,41 @@ public class EmpDAO {
 		   disConnection();
 	   }
 	   return vo;
+   }
+   
+   public List<EmpVO> empSubqueryData()
+   {
+	   List<EmpVO> list=new ArrayList<EmpVO>();
+	   try
+	   {
+		   getConnection();// 미리 연결된 Connection주소를 얻어 온다 
+		   String sql="SELECT empno,ename,job,hiredate,"
+				     +"(SELECT dname FROM dept WHERE deptno=emp.deptno),"
+				     +"(SELECT loc FROM dept WHERE deptno=emp.deptno) "
+				     +"FROM emp";
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   EmpVO vo=new EmpVO();
+			   vo.setEmpno(rs.getInt(1));
+			   vo.setEname(rs.getString(2));
+			   vo.setJob(rs.getString(3));
+			   vo.setHiredate(rs.getDate(4));
+			   vo.getDvo().setDname(rs.getString(5));
+			   vo.getDvo().setLoc(rs.getString(6));
+			   list.add(vo);
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 반환 => 재사용 
+		   disConnection();
+	   }
+	   return list;
    }
 }
