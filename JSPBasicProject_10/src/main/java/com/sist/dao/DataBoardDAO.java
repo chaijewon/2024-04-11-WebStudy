@@ -166,6 +166,33 @@ public class DataBoardDAO {
 		}
 		return vo;
 	}
+	public DataBoardVO databoardUpdateData(int no)
+	{
+		DataBoardVO vo=new DataBoardVO();
+		try
+		{
+			getConnection();
+			String sql="SELECT no,name,subject,content "
+			   +"FROM databoard "
+			   +"WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return vo;
+	}
 	// 글쓰기 => 업로드 
 	public void databoardInsert(DataBoardVO vo)
 	{
@@ -194,7 +221,93 @@ public class DataBoardDAO {
 		}
 	}
 	// 수정  => 파일 변경시 처리 
+	public void databoardUpdate(DataBoardVO vo)
+	{
+		try
+		{
+			getConnection();
+			String sql="UPDATE databoard SET "
+					  +"name=?,subject=?,content=? "
+					  +"WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, vo.getName());
+			ps.setString(2, vo.getSubject());
+			ps.setString(3, vo.getContent());
+			ps.setInt(4, vo.getNo());
+			
+			ps.executeUpdate();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+	}
+	// 데이터가 삭제 전에 파일 정보 읽기 => 파일을 폴더에서 삭제 
+	public DataBoardVO databoardFileInfoData(int no)
+	{
+		DataBoardVO vo=new DataBoardVO();
+		try
+		{
+			getConnection();
+			String sql="SELECT filename,filesize "
+					  +"FROM databoard "
+					  +"WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setFilename(rs.getString(1));
+			vo.setFilesize(rs.getInt(2));
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return vo;
+	}
 	// 삭제  => 파일 삭제 
+	public String databoardDelete(int no,String pwd)
+	{
+		String result="";
+		try
+		{
+			getConnection();
+			String sql="SELECT pwd FROM databoard "
+					  +"WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			String db_pwd=rs.getString(1);
+			rs.close();
+			
+			if(db_pwd.equals(pwd))
+			{
+				result="yes";
+				sql="DELETE FROM databoard "
+				   +"WHERE no="+no;
+				ps=conn.prepareStatement(sql);
+				ps.executeUpdate();
+			}
+			else
+			{
+				result="no";
+			}
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return result;
+	}
 }
 
 

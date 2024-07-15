@@ -24,6 +24,54 @@ h3{
    text-align: center;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let i=0;
+$(function(){
+	$('#delclick').click(function(){
+		if(i===0)
+		{
+			$('#delclick').text("취소");
+			$('#del').show();
+			i=1;
+		}
+		else
+		{
+			$('#delclick').text("삭제");
+			$('#del').hide();
+			i=0;
+		}
+	})
+	$('button').click(function(){
+		let no=$(this).attr("data-no");
+		let pwd=$('#pwd').val();
+		if(pwd.trim()==="")
+		{
+			$('#pwd').focus();
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:'delete.jsp',
+			data:{"no":no,"pwd":pwd},
+			success:function(result)
+			{
+				alert(result)
+				if(result.trim()==='no')
+				{
+					alert("비밀번호가 틀립니다");
+					$('#pwd').val("")
+					$('#pwd').focus()
+				}
+				else
+				{
+					location.href="list.jsp";
+				}
+			}
+		})
+	})
+})
+</script>
 </head>
 <body>
   <div class="container">
@@ -67,9 +115,15 @@ h3{
           </tr>
           <tr>
             <td colspan="4" class="text-right">
-             <a href="#" class="btn btn-xs btn-success">수정</a>
-             <a href="#" class="btn btn-xs btn-info">삭제</a>
+             <a href="update.jsp?no=<%=vo.getNo() %>" class="btn btn-xs btn-success">수정</a>
+             <span class="btn btn-xs btn-info" id="delclick">삭제</span>
              <a href="list.jsp" class="btn btn-xs btn-warning">목록</a>
+            </td>
+          </tr>
+          <tr style="display: none" id="del">
+            <td colspan="4" class="text-right">
+             비밀번호:<input type="password" name=pwd size=15 class="input-sm" id="pwd">
+             <button class="btn-sm btn-primary" data-no="<%=vo.getNo()%>">삭제</button>
             </td>
           </tr>
         </tbody>
