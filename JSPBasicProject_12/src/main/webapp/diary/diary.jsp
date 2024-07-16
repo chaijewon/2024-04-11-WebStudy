@@ -140,9 +140,12 @@ function change()
         	   String id=(String)session.getAttribute("id");
         	   int k=dao.diaryCheck(id, year, month, i);
         	   System.out.println("i="+i+",k="+k);
+        	   
+        	   int a=tDay+tMonth+tYear;
+        	   int b=i+month+year;
        %>
               <%
-                 if(day<=i || tMonth!=month || tYear!=year)
+                 if(a<=b && tYear<=year && tMonth<=month)
                  {
               %>
                   <td width="100" height="100" valign="top" <%= i==day?"class=danger":""%>>
