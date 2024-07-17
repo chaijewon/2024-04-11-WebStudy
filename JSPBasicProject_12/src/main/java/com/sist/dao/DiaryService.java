@@ -169,7 +169,7 @@ public class DiaryService {
 	   try
 	   {
 		   getConnection();
-		   String sql="SELECT no,subject,TO_CHAR(regdate,'YYYY-MM-DD') "
+		   String sql="SELECT no,subject,TO_CHAR(regdate,'YYYY-MM-DD'),msg,year,month,day "
 				     +"FROM diary "
 				     +"WHERE id=? AND year=? AND month=? AND day=? "
 				     +"ORDER BY no DESC";
@@ -188,6 +188,10 @@ public class DiaryService {
 			   dvo.setNo(rs.getInt(1));
 			   dvo.setSubject(rs.getString(2));
 			   dvo.setDbday(rs.getString(3));
+			   dvo.setMsg(rs.getString(4));
+			   dvo.setYear(rs.getInt(5));
+			   dvo.setMonth(rs.getInt(6));
+			   dvo.setDay(rs.getInt(7));
 			   list.add(dvo);
 		   }
 		   rs.close();
@@ -231,6 +235,62 @@ public class DiaryService {
 	   return bCheck;
    }
    // 2-4 일정 수정 
+   public DiaryVO diaryUpdateData(int no)
+   {
+	   DiaryVO vo=new DiaryVO();
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT no,subject,msg,year,month,day "
+				     +"FROM diary "
+				     +"WHERE no="+no;
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setSubject(rs.getString(2));
+		   vo.setMsg(rs.getString(3));
+		   vo.setYear(rs.getInt(4));
+		   vo.setMonth(rs.getInt(5));
+		   vo.setDay(rs.getInt(6));
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return vo;
+   }
+   public void diaryUpdate(DiaryVO vo)
+   {
+	   try
+	   {
+		   getConnection();
+		   String sql="UPDATE diary SET "
+				     +"subject=?,msg=?,"
+				     +"year=?,month=?,day=?,regdate=SYSDATE "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   // ?에 값을 채운다 
+		   ps.setString(1, vo.getSubject());
+		   ps.setString(2, vo.getMsg());
+		   ps.setInt(3, vo.getYear());
+		   ps.setInt(4, vo.getMonth());
+		   ps.setInt(5, vo.getDay());
+		   ps.setInt(6, vo.getNo());
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
    // 2-5 일정 취소
    public void diaryDelete(int no)
    {

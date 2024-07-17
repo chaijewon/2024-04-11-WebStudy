@@ -106,6 +106,26 @@ h3{
   text-align: center
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let i=0;
+$(function(){
+	$('.checks').click(function(){
+		let no=$(this).attr("data-no");
+		$('.msgs').hide();
+		if(i==0)
+		{
+			$('#msg'+no).show("slow");
+			i=1;
+		}
+		else
+		{
+			$('#msg'+no).hide("slow");
+			i=0;
+		}
+	})
+})
+</script>
 </head>
 <body>
   <div class="container">
@@ -115,9 +135,9 @@ h3{
         <thead>
           <tr>
             <th width=10% class="text-center">번호</th>
-            <th width=50% class="text-center">일정</th>
+            <th width=40% class="text-center">일정</th>
             <th width=20% class="text-center">작성일</th>
-            <th width=20% class="text-center"></th>
+            <th width=30% class="text-center"></th>
           </tr>
         </thead>
         <tbody>
@@ -127,17 +147,16 @@ h3{
           %>
                 <tr>
                   <td width=10% class="text-center"><%=dvo.getNo() %></td>
-                  <td width=50%><%=dvo.getSubject() %></td>
+                  <td width=40%><%=dvo.getSubject() %></td>
                   <td width=20% class="text-center"><%=dvo.getDbday() %></td>
-                  <td width="20%" class="text-center">
-                    <form method="post" action="diary_update.jsp" style="display: inline;">
-		               <input type=hidden name="year" value="<%=year%>">
-		               <input type=hidden name="month" value="<%=month%>">
-		               <input type=hidden name="day" value="<%=day%>">
-		               <button class="btn-xs btn-primary">수정</button>
-		             </form>
+                  <td width="30%" class="text-center">
+                     <span class="btn btn-xs btn-warning checks" data-no="<%=dvo.getNo()%>">일정확인</span>
+                     <a href="diary_update.jsp?no=<%=dvo.getNo() %>" class="btn btn-xs btn-info">수정</a>
              		 <a href="diary_delete.jsp?no=<%=dvo.getNo() %>" class="btn btn-xs btn-success">취소</a>
                   </td>
+                </tr>
+                <tr id="msg<%=dvo.getNo()%>" class="msgs" style="display:none">
+                  <td colspan="4" class="text-left" valign="top"><pre style="white-space:pre-wrap; "><%=dvo.getMsg() %></pre></td>
                 </tr>
           <%
              }
