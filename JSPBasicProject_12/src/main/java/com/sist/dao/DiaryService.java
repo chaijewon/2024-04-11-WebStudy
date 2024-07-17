@@ -163,6 +163,44 @@ public class DiaryService {
 	   }
    }
    // 2-2 일정 출력 
+   public List<DiaryVO> diaryListData(DiaryVO vo)
+   {
+	   List<DiaryVO> list=new ArrayList<DiaryVO>();
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT no,subject,TO_CHAR(regdate,'YYYY-MM-DD') "
+				     +"FROM diary "
+				     +"WHERE id=? AND year=? AND month=? AND day=? "
+				     +"ORDER BY no DESC";
+		   // INDEX => 검색이 많은 경우 , 데이터가 많은 경우 
+		   // ==> 수정 , 삭제 , 추가가 많은 경우에는 INDEX를 계속 rebuild하기 때문에 속도가 느려진다
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, vo.getId());
+		   ps.setInt(2, vo.getYear());
+		   ps.setInt(3, vo.getMonth());
+		   ps.setInt(4, vo.getDay());
+		   
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   DiaryVO dvo=new DiaryVO();
+			   dvo.setNo(rs.getInt(1));
+			   dvo.setSubject(rs.getString(2));
+			   dvo.setDbday(rs.getString(3));
+			   list.add(dvo);
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();// 반환 (재사용) => Connection을 관리하기 편리 , 일정 갯수 유지 
+	   }
+	   return list;
+   }
    // 2-3 달력에 일정 표시
    public int diaryCheck(String id,int year,int month,int day)
    {
@@ -194,6 +232,23 @@ public class DiaryService {
    }
    // 2-4 일정 수정 
    // 2-5 일정 취소
+   public void diaryDelete(int no)
+   {
+	   try
+	   {
+		   getConnection();
+		   String sql="DELETE FROM diary WHERE no="+no;
+		   ps=conn.prepareStatement(sql);
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
    // 3. 장바구니 : 세션 => 제공하는 메소드 정리 
    // 3-1 상품 출력 
    // 3-2 장바구니 등록 => 세션 처리 
