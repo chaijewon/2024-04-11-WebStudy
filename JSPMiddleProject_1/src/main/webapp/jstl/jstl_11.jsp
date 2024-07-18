@@ -34,6 +34,7 @@
   <%= d.format(1234567) %>
   <h3>JSTL : 숫자변환</h3>
   ${1234567 }<br>
+  
   <fmt:formatNumber value="${1234567 }" type="currency"/>
 </body>
 </html>
