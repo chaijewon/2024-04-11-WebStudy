@@ -143,6 +143,31 @@ public class BoardModel {
 	   }
 	 }catch(Exception ex) {}
    }
+   
+   public void boardDeleteOk(HttpServletRequest request,HttpServletResponse response)
+   {
+	   String no=request.getParameter("no");
+	   String pwd=request.getParameter("pwd");
+	   
+	   BoardDAO dao=BoardDAO.newInstance();
+	   boolean bCheck=dao.boardDelete(Integer.parseInt(no), pwd);
+	   
+	   try
+	   {
+	    if(bCheck==true)
+	    {
+		   response.sendRedirect("list.jsp");
+	    }
+	    else
+	    {
+	    	   PrintWriter out=response.getWriter();
+			   out.write("<script>");
+			   out.write("alert(\"비밀번호가 틀립니다\");");
+			   out.write("history.back();");
+			   out.write("</script>");
+	    }
+	   }catch(Exception ex) {}
+   }
 }
 
 
