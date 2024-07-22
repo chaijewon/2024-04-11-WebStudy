@@ -20,7 +20,8 @@ public class Controller extends HttpServlet {
     	"com.sist.model.InsertOkModel",
     	"com.sist.model.DetailModel",
     	"com.sist.model.ReplyModel",
-    	"com.sist.model.ReplyOkModel"
+    	"com.sist.model.ReplyOkModel",
+    	"com.sist.model.UpdateModel"
     };
     private String[] strCmd= {
     	"list.do",
@@ -28,7 +29,8 @@ public class Controller extends HttpServlet {
     	"insert_ok.do",
     	"detail.do",
     	"reply.do",
-    	"reply_ok.do"
+    	"reply_ok.do",
+    	"update.do"
     };
     private Map clsMap=new HashMap();
     // 관련된 클래스를 모아서 관리 => Factory Pattern => Spring (Container) : 클래스 관리자  
@@ -46,7 +48,7 @@ public class Controller extends HttpServlet {
     // .do 사용이 가능 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 사용자의 요청 정보를 읽어 온다 (URI)
-		String cmd=request.getRequestURI();
+		String cmd=request.getRequestURI(); // ?
 		//System.out.println("cmd="+cmd);
 		cmd=cmd.substring(cmd.lastIndexOf("/")+1);
 		//System.out.println("cmd2="+cmd);

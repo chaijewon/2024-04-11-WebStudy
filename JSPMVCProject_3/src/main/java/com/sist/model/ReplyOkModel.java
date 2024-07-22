@@ -27,7 +27,8 @@ public class ReplyOkModel implements Model {
 		vo.setPwd(pwd);
 		// BoardDAO 전송 => 오라클 
 		BoardDAO dao=BoardDAO.newInstance();
-		// 답변올리기 
+		// 답변올리기
+		dao.boardReplyInsert(Integer.parseInt(pno), vo);
 		return "redirect:list.do";
 	}
 
