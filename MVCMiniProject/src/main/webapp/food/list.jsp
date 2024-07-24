@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@
           <header class="heading">맛집 목록</header>
           <ul class="nospace clear">
            <c:forEach var="vo" items="${list }" varStatus="s">
-             <li class="one_quarter ${s.index%4==0?'first':'' }"><a href="#"><img src="${vo.poster }" title="${vo.name }"></a></li>
+             <li class="one_quarter ${s.index%4==0?'first':'' }"><a href="../food/before_detail.do?fno=${vo.fno }"><img src="${vo.poster }" title="${vo.name }"></a></li>
            </c:forEach>
           </ul>
           

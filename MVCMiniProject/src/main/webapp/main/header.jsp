@@ -54,8 +54,9 @@
     </div>
     <div class="fl_right">
       <ul class="inline">
-        <li><i class="fa fa-phone"></i><input type="text" class="input-sm" placeholder="아이디"></li>
-        <li><i class="fa fa-envelope-o"></i> <input type="password" class="input-sm" placeholder="비밀번호"></li>
+        <li><i class="fa fa-user" aria-hidden="true"></i><input type="text" class="input-sm" placeholder="아이디" style="width: 120px"></li>
+        <li><i class="fa fa-unlock-alt" aria-hidden="true"></i> <input type="password" class="input-sm" placeholder="비밀번호" style="width: 120px"></li>
+        <li><input type=image src="../main/login.png" style="width: 100px;height: 25px;"></li>
       </ul>
     </div>
    </header>
