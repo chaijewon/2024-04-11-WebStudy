@@ -13,6 +13,11 @@
    margin: 0px auto;
    width: 960px;
 }
+.a{
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
 </style>
 </head>
 <body>
