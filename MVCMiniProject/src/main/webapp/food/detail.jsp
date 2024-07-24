@@ -42,6 +42,14 @@
    <tr>
     <td>${vo.content }</td>
    </tr>
+   <tr>
+    <td class="text-right">
+      <a href="#" class="btn btn-xs btn-success">예약</a>
+      <a href="#" class="btn btn-xs btn-info">찜하기</a>
+      <a href="#" class="btn btn-xs btn-warning">좋아요</a>
+      <a href="../food/list.do" class="btn btn-xs btn-primary">목록</a>
+    </td>
+   </tr>
   </table>
   <div style="height: 10px"></div>
   <h2 class="sectiontitle">인근 맛집</h2>
@@ -49,7 +57,8 @@
       <ul class="slides">
        <c:forEach var="svo" items="${sList }">
        <li>
-          <figure><img class="radius-10 btmspace-10" src="${svo.poster }" style="width: 320px;height: 185px">
+          <figure><img class="radius-10 btmspace-10" 
+              title="${svo.address }" src="${svo.poster }" style="width: 320px;height: 185px">
             <figcaption><a href="#">${svo.name }</a></figcaption>
           </figure>
         </li>

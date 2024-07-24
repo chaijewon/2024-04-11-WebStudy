@@ -64,7 +64,7 @@
 <div class="wrapper row2">
   <nav id="mainav" class="clear"> 
     <ul class="clear">
-      <li class="active"><a href="index.html">홈</a></li>
+      <li class="active"><a href="../main/main.do">홈</a></li>
       <li><a class="drop" href="#">회원</a>
         <ul>
           <li><a href="pages/gallery.html">회원가입</a></li>
@@ -77,7 +77,7 @@
           <li><a href="../food/list.do">맛집 목록</a></li>
           <%-- Controller를 찾을때 URL패턴 => .do --%>
           <li><a href="pages/full-width.html">맛집 예약</a></li>
-          <li><a href="pages/sidebar-left.html">지역별 맛집 찾기</a></li>
+          <li><a href="../food/find.do">지역별 맛집 찾기</a></li>
           <li><a href="pages/sidebar-left.html">맛집 뉴스</a></li>
         </ul>
       </li>
@@ -87,7 +87,7 @@
           <li><a href="pages/full-width.html">자연 & 관광</a></li>
           <li><a href="pages/sidebar-left.html">쇼핑</a></li>
           <li><a href="pages/sidebar-left.html">호텔</a></li>
-          <li><a href="pages/sidebar-left.html">서울 날씨</a></li>
+          <li><a href="../seoul/weather.do">서울 날씨</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">커뮤니티</a>

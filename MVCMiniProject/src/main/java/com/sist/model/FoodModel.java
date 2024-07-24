@@ -11,6 +11,10 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 // 맛집 관련된 모든 기능 처리하는 클래스 
 public class FoodModel {
+   private String[] guList = { "전체", "강서구", "양천구", "구로구", "마포구", "영등포구", "금천구",
+			"은평구", "서대문구", "동작구", "관악구", "종로구", "중구", "용산구", "서초구", "강북구",
+			"성북구", "도봉구", "동대문구", "성동구", "강남구", "노원구", "중랑구", "광진구", "송파구",
+			"강동구" };
    //1. 목록 출력 
    @RequestMapping("food/list.do") // 밑에 있는 클래스,변수,메소드를 찾아주는 역할 
    public String food_list(HttpServletRequest request,
@@ -83,12 +87,52 @@ public class FoodModel {
 	   String addr2=addr.trim();
 	   addr2=addr2.substring(0,addr2.indexOf(" "));
 	   System.out.println(addr2);
-	   List<LocationVO> sList=dao.foodLoactionData(addr2);
+	   List<FoodVO> sList=dao.foodLoactionData(addr2);
 	   request.setAttribute("sList", sList);
 	   request.setAttribute("main_jsp", "../food/detail.jsp");
 	   return "../main/main.jsp";
    }
    //2. 맛집 검색 
+   @RequestMapping("food/find.do")
+   public String food_find(HttpServletRequest request,HttpServletResponse response)
+   {
+	   String gu=request.getParameter("gu");
+	   String page=request.getParameter("page");
+	   if(page==null)
+		   page="1";
+	   if(gu==null)
+		   gu="4";
+	   
+	   int curpage=Integer.parseInt(page);
+	   FoodDAO dao=FoodDAO.newInstance();
+	   List<FoodVO> list=dao.foodFindData(curpage, guList[Integer.parseInt(gu)]);
+	   int totalpage=dao.foodFindTotalPage(guList[Integer.parseInt(gu)]);
+	   // 응답 : response 
+	   final int BLOCK=10;
+	   int startPage=((curpage-1)/BLOCK*BLOCK)+1;// 1 11 21...
+	   /*
+	    *   startPage = 1 
+	    *      curpage = 1~10
+	    *   endPage = 10
+	    *      curpage = 1~10
+	    */
+	   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;// 10 20 30...
+	   
+	   if(endPage>totalpage)
+		   endPage=totalpage; // 23
+	   
+	   int count=dao.foodFindCount(guList[Integer.parseInt(gu)]);
+	   request.setAttribute("list", list);
+	   request.setAttribute("curpage", curpage);
+	   request.setAttribute("totalpage", totalpage);
+	   request.setAttribute("startPage", startPage);
+	   request.setAttribute("endPage", endPage);
+	   request.setAttribute("gu", gu);
+	   request.setAttribute("fd", guList[Integer.parseInt(gu)]);
+	   request.setAttribute("count", count);
+	   request.setAttribute("main_jsp", "../food/find.jsp");
+	   return "../main/main.jsp";
+   }
    //3. 맛집 예약 
    //4. 맛집 추천 
 }
