@@ -1,5 +1,4 @@
 package com.sist.model;
-import java.lang.annotation.Repeatable;
 import java.util.*;
 
 import javax.servlet.http.Cookie;
@@ -89,6 +88,7 @@ public class FoodModel {
 	   System.out.println(addr2);
 	   List<FoodVO> sList=dao.foodLoactionData(addr2);
 	   request.setAttribute("sList", sList);
+	   request.setAttribute("addr", addr2);
 	   request.setAttribute("main_jsp", "../food/detail.jsp");
 	   return "../main/main.jsp";
    }

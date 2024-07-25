@@ -92,7 +92,7 @@
       </li>
       <li><a class="drop" href="#">커뮤니티</a>
         <ul>
-          <li><a href="pages/gallery.html">자유 게시판</a></li>
+          <li><a href="../board/list.do">자유 게시판</a></li>
           <li><a href="pages/full-width.html">공지사항</a></li>
           <li><a href="pages/sidebar-left.html">묻고 답하기</a></li>
           <li><a href="pages/sidebar-left.html">실시간 채팅</a></li>
