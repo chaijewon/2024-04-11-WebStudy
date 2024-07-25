@@ -223,4 +223,36 @@ public class BoardDAO {
 	   }
 	   return bCheck;
    }
+   
+   public boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   conn=dbConn.getConnection();
+		   // 비밀번호 검색
+		   String sql="SELECT pwd FROM board WHERE no="+no;
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   String db_pwd=rs.getString(1);
+		   rs.close();
+		   if(db_pwd.equals(pwd))
+		   {
+			   bCheck=true;
+			   sql="DELETE FROM board WHERE no="+no;
+			   ps=conn.prepareStatement(sql);
+			   ps.executeUpdate();
+		   }
+		   // 수정 
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace(); // 에러 확인 
+	   }
+	   finally
+	   {
+		   dbConn.disConnection(conn, ps);// 반환 => 재사용 => DBCP
+	   }
+	   return bCheck;
+   }
 }
