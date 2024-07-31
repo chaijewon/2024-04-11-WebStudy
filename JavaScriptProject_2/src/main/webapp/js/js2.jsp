@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--
+      325page 
       함수 / 배열 함수 / 객체 모델 / 객체 지향 / Jquery 
       
       함수 (메소드) 

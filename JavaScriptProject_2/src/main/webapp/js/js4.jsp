@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--
+      331page
       배열   /  객체 
       === []  === {} 
       1)배열 : 데이터형이 섞어서 사용이 가능 => object

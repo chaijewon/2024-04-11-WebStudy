@@ -3,7 +3,7 @@
 <%--
    매개변수 => function형도 매개변수로 사용이 가능
             =================
-             Callback => Redux
+             Callback => Redux => 329page
  --%>
 <!DOCTYPE html>
 <html>
