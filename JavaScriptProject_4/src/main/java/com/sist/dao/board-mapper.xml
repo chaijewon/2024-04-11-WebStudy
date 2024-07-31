@@ -44,9 +44,36 @@
           table명 , column명 => ${name}
      --> 
   </select>
+  <!-- 총페이지  -->
+  <select id="boardRowCount" resultType="int">
+   SELECT COUNT(*) FROM board
+  </select>
   <!-- 상세보기 <select>-->
+  <update id="hitIncrement" parameterType="int">
+   UPDATE board SET 
+   hit=hit+1
+   WHERE no=#{no}
+  </update>
+  <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+   SELECT no,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+   FROM board
+   WHERE no=#{no}
+  </select>
   <!-- 추가 <insert>-->
+  <insert id="boardInsert" parameterType="BoardVO">
+   INSERT INTO board VALUES(
+     board_no_seq.nextval,#{name},#{subject},#{content},#{pwd},SYSDATE,0
+   )
+  </insert>
   <!-- 수정 <update>-->
   <!-- 삭제 <delete> -->
+  <select id="boardGetPassword" resultType="string" parameterType="int">
+   SELECT pwd FROM board
+   WHERE no=#{no}
+  </select>
+  <delete id="boardDelete" parameterType="int">
+   DELETE FROM board
+   WHERE no=#{no}
+  </delete>
   <!-- 태그안에 sql문장은 1개만 실행 : 두개 : <statement> , <sql> -->
 </mapper>
