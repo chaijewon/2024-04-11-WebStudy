@@ -22,7 +22,7 @@ function postfind()
 }
 function idcheck()
 {
-	window.open("idcheck.jsp","idcheck","width=350,height=200,scrollbars=yes")
+	window.open("idcheck.do","idcheck","width=380,height=300,scrollbars=yes")
 }
 </script>
 </head>
