@@ -60,12 +60,22 @@
    WHERE no=#{no}
   </select>
   <!-- 추가 <insert>-->
+  <!-- 
+     INSERT INTO board VALUES(
+     board_no_seq.nextval,?,?,?,?,SYSDATE,0
+   )
+   -->
   <insert id="boardInsert" parameterType="BoardVO">
    INSERT INTO board VALUES(
      board_no_seq.nextval,#{name},#{subject},#{content},#{pwd},SYSDATE,0
    )
   </insert>
   <!-- 수정 <update>-->
+  <update id="boardUpdate" parameterType="BoardVO">
+    UPDATE board SET 
+    name=#{name},content=#{content},subject=#{subject}
+    WHERE no=#{no}
+  </update>
   <!-- 삭제 <delete> -->
   <select id="boardGetPassword" resultType="string" parameterType="int">
    SELECT pwd FROM board
