@@ -56,12 +56,12 @@ public class FoodModel {
   public void food2_food(HttpServletRequest request,HttpServletResponse response)
   {
 	  String page=request.getParameter("page");
-	  System.out.println("page="+page);
+	  //System.out.println("page="+page);
 	  if(page==null)
 		  page="1";
 	  int curpage=Integer.parseInt(page);
 	  String type=request.getParameter("type");
-	  System.out.println("type="+type);
+	  //System.out.println("type="+type);
 	  if(type==null)
 		  type="1";
 	  Map map=new HashMap();
@@ -96,7 +96,7 @@ public class FoodModel {
 			  arr.add(obj);
 			  i++;
 		  }
-		  System.out.println(arr.toJSONString());
+		  //System.out.println(arr.toJSONString());
 		  // JSP로 전송 
 		  response.setContentType("text/plain;charset=UTF-8");
 		  PrintWriter out=response.getWriter();
