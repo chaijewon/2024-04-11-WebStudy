@@ -11,6 +11,7 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 public class MemberModel {
   @RequestMapping("member/login.do")
+  //                       MemberVO vo
   public void member_login(HttpServletRequest request,HttpServletResponse response)
   {
 	  // data:{"id":id,"pwd":pwd}

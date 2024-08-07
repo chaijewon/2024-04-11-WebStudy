@@ -92,13 +92,13 @@ $(function(){
       <ul class="inline">
         <li><input type=text id=id class="input-sm" placeholder="아이디"></li>
         <li><input type=password id=pwd class="input-sm" placeholder="비밀번호"></li>
-        <li><input type=button id=logBtn class="btn-sm btn-danger" value="로그인"></li>
+        <li><input type=button id=logBtn class="btn-sm btn-danger" value="로그인" style="height:30px;width: 100px"></li>
       </ul>
       </c:if>
       <c:if test="${sessionScope.id!=null }">
       <ul class="inline">
         <li>${sessionScope.name }(${sessionScope.admin=='y'?"관리자":"일반사용자" })님 로그인되었습니다</li>
-        <li><input type=button id=logoutBtn class="btn-sm btn-success" value="로그아웃"></li>
+        <li><input type=button id=logoutBtn class="btn-sm btn-success" value="로그아웃" style="height:30px;width: 100px"></li>
       </ul>
       </c:if>
     </div>
@@ -152,7 +152,7 @@ $(function(){
       </li>
       <li><a class="drop" href="#">커뮤니티</a>
         <ul>
-          <li><a href="pages/gallery.html">자유게시판</a></li>
+          <li><a href="../board/list.do">자유게시판</a></li>
           <c:if test="${sessionScope.id!=null }">
            <li><a href="pages/full-width.html">묻고답하기</a></li>
           </c:if>
