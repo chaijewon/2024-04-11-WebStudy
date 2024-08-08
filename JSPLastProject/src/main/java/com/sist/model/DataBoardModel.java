@@ -159,5 +159,92 @@ public class DataBoardModel {
 		  out.write(result);
 	  }catch(Exception ex) {}
   }
-  
+  /*
+   *    <form> <a> : 서버로 전송 => 요청값
+   *    =====================
+   *    서버에서 처리 결과 : request.setAttribute() => 응답값
+   *    
+   *    벤치마킹 : 1) 서버로 전송되는 데이터 확인 : 주소란 
+   *            2) 출력 화면 : 어떤 데이터가 필요한지 확인 
+   *            =============================== 웹 사이트 (70%)
+   */
+  @RequestMapping("databoard/update.do")
+  public String databoard_update(HttpServletRequest request,HttpServletResponse response)
+  {
+	  String no=request.getParameter("no");
+	  DataBoardVO vo=DataBoardDAO.databoardUpdateData(Integer.parseInt(no));
+	  // 데이터를 request에 추가해서 jsp로 전송 
+	  request.setAttribute("vo", vo);
+	  request.setAttribute("main_jsp", "../databoard/update.jsp");
+	  return "../main/main.jsp";
+  }
+  @RequestMapping("databoard/password_check.do")
+  public void databoard_pwd_check(HttpServletRequest request,HttpServletResponse response)
+  {
+	  String no=request.getParameter("no");
+	  String pwd=request.getParameter("pwd");
+	  String db_pwd=DataBoardDAO.databoardGetPassword(Integer.parseInt(no));
+	  String result="no";
+	  if(db_pwd.equals(pwd))
+	  {
+		  result="yes";
+	  }
+	  try
+	  {
+		  PrintWriter out=response.getWriter();
+		  out.write(result);
+	  }catch(Exception ex) {}
+  }
+  @RequestMapping("databoard/update_ok.do")
+  public String databoard_update_ok(HttpServletRequest request,HttpServletResponse response)
+  {
+	  try
+	  { 
+		  
+		  request.setCharacterEncoding("UTF-8");
+		  String path="c:\\project_upload";
+		  String enctype="UTF-8";// 한글 파일명 
+		  int max_size=1024*1024*100;
+		  MultipartRequest mr=
+				  new MultipartRequest(request, path,max_size,enctype,
+						  new DefaultFileRenamePolicy());
+		  // 자동 변경 => a.jpg , a1.jpg
+		  String name=mr.getParameter("name");
+		  String subject=mr.getParameter("subject");
+		  String content=mr.getParameter("content");
+		  String pwd=mr.getParameter("pwd");
+		  String filename=mr.getFilesystemName("upload");
+		  String no=mr.getParameter("no");
+		  
+		  DataBoardVO dvo=DataBoardDAO.databoardFileInfoData(Integer.parseInt(no));
+		  if(dvo.getFilesize()>0)
+		  {
+			  File file=new File("c:\\project_upload\\"+dvo.getFilename());
+			  file.delete();
+		  }
+		  // a.jpg
+		  // a.jpg => a1.jpg
+		  DataBoardVO vo=new DataBoardVO();
+		  vo.setName(name);
+		  vo.setSubject(subject);
+		  vo.setContent(content);
+		  vo.setPwd(pwd);
+		  vo.setNo(Integer.parseInt(no));
+		  
+		  if(filename==null) // 업로드가 없는 상태 
+		  {
+			  vo.setFilename("");
+			  vo.setFilesize(0);
+		  }
+		  else // 업로드가 된 상태 
+		  {
+			  File file=new File(path+"\\"+filename);
+			  vo.setFilename(filename);
+			  vo.setFilesize((int)file.length()); // int => 2byte
+		  }
+		  
+		  DataBoardDAO.databoardUpdate(vo);
+	  }catch(Exception ex){}
+	  return "redirect:../databoard/list.do";
+  }
 }

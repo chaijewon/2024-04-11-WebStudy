@@ -177,4 +177,71 @@ public class DataBoardDAO {
 		  }
 	   return result;
    }
+   
+   public static DataBoardVO databoardUpdateData(int no)
+   {
+	   DataBoardVO vo=new DataBoardVO();
+	   SqlSession session=null;
+		  try
+		  {
+			  session=ssf.openSession(); 
+			  vo=session.selectOne("databoardDetailData",no);
+			  
+		  }catch(Exception ex)
+		  {
+			  ex.printStackTrace();
+		  }
+		  finally
+		  {
+			  if(session!=null)
+				  session.close(); // 반환 (DBCP사용)
+		  }
+	   return vo;
+   }
+   public static String databoardGetPassword(int no)
+   {
+	   String pwd="";
+	   SqlSession session=null;
+		  try
+		  {
+			  session=ssf.openSession(); 
+			  pwd=session.selectOne("databoardGetPassword",no);
+			  
+		  }catch(Exception ex)
+		  {
+			  ex.printStackTrace();
+		  }
+		  finally
+		  {
+			  if(session!=null)
+				  session.close(); // 반환 (DBCP사용)
+		  }
+	   return pwd;
+   }
+   /*
+    *     <update id="databoardUpdate" parameterType="DataBoardVO">
+		     UPDATE project_databoard SET
+		     name=#{name},subject=#{subject},content=#{content},
+		     filename=#{filename},filesize=#{filesize}
+		     WHERE no=#{no}
+		   </update>
+    */
+   public static void databoardUpdate(DataBoardVO vo)
+   {
+	      SqlSession session=null;
+		  try
+		  {
+			  session=ssf.openSession(true); 
+			  session.update("databoardUpdate",vo);
+			  
+		  }catch(Exception ex)
+		  {
+			  ex.printStackTrace();
+		  }
+		  finally
+		  {
+			  if(session!=null)
+				  session.close(); // 반환 (DBCP사용)
+		  }
+   }
 }

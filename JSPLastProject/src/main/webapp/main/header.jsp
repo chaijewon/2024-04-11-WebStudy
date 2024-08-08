@@ -100,6 +100,7 @@ $(function(){
         <li>${sessionScope.name }(${sessionScope.admin=='y'?"관리자":"일반사용자" })님 로그인되었습니다</li>
         <li><input type=button id=logoutBtn class="btn-sm btn-success" value="로그아웃" style="height:30px;width: 100px"></li>
       </ul>
+      
       </c:if>
     </div>
     </header>
