@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.emp-mapper">
+  <!-- JOIN : 포함클래스 (has-a) -->
+  <!-- 
+       while(rs.next())
+       {
+          EmpVO vo=new EmpVO();
+          vo.setEmpno(rs.getString(1))
+          ..
+          vo.getDvo().setDname(rs.getString(7))
+          =====================
+       }
+       
+       SELECT empno,ename,job
+       SELECT ename,job,empno
+   -->
+   <resultMap type="com.sist.vo.EmpVO" id="empMap">
+     <result property="dvo.dname" column="dname"/>
+     <!-- 
+         vo.getDvo().setDname(rs.getString("dname"))
+      -->
+     <result property="dvo.loc" column="loc"/>
+     <!-- 
+         vo.getDvo().setLoc(rs.getString("loc"))
+      -->
+     <!-- 
+         <result property="ename" column="ename"/>
+         vo.setEname(rs.getString("ename"))
+      -->
+      <result property="svo.grade" column="grade"/>
+   </resultMap>
+   <select id="empListData" resultMap="empMap">
+    SELECT empno,ename,job,TO_CHAR(hiredate,'YYYY-MM-DD') as dbday,
+           sal,emp.deptno,dname,loc,grade
+    FROM emp,dept,salgrade
+    WHERE emp.deptno=dept.deptno
+    AND sal BETWEEN losal AND hisal
+   </select>
+</mapper>
+
+
+
+

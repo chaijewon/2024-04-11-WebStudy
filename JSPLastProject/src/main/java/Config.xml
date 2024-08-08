@@ -9,6 +9,8 @@
    <typeAliases>
      <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
      <typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
+     <typeAlias type="com.sist.vo.DataBoardVO" alias="DataBoardVO"/>
+     <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
    </typeAliases>
    <!-- connection관련 : getConnection/disConnection -->
     <environments default="development">
@@ -25,5 +27,7 @@
    <mappers>
      <mapper resource="com/sist/mapper/member-mapper.xml"/>
      <mapper resource="com/sist/mapper/board-mapper.xml"/>
+     <mapper resource="com/sist/mapper/databoard-mapper.xml"/>
+     <mapper resource="com/sist/mapper/emp-mapper.xml"/>
    </mappers>
 </configuration>
