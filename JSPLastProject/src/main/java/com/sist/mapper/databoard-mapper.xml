@@ -91,5 +91,51 @@
     DELETE FROM project_databoard
     WHERE no=#{no}
    </delete>
-   <!-- *** 동적 쿼리 : 검색 -->
+   <!-- *** 동적 쿼리 : 검색 
+        ${} => 문자열 => 컬럼/테이블명 지정 => ''사용하지 않는다 
+        #{} => 문자열 => 일반 데이터 => '' 사용 
+        
+        WHERE name='홍길동'
+   -->
+   <!-- 
+        WHERE 
+        <if test="fs=='N'">
+         name LIKE ~
+        </if>
+        <if test="fs=='S'">
+         OR subject LIKE ~
+        </if>
+        <if test="fs=='C'">
+         OR content LIKE ~
+        </if>
+        
+    -->
+   <!-- <select id="databoardFindData" resultType="DataBoardVO" parameterType="hashmap">
+    SELECT no,name,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+    FROM project_databoard
+    WHERE ${fs} LIKE '%'||#{ss}||'%'
+   </select> -->
+   
+   <select id="databoardFindData" resultType="DataBoardVO" parameterType="hashmap">
+     SELECT no,name,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+     FROM project_databoard
+     WHERE
+     <trim prefix="(" suffix=")" prefixOverrides="OR">
+      <foreach collection="fsArr" item="fs">
+       <trim prefix="OR">
+         <choose>
+          <when test="fs=='N'.toString()">
+           name LIKE '%'||#{ss}||'%'
+          </when>
+          <when test="fs=='S'.toString()">
+           subject LIKE '%'||#{ss}||'%'
+          </when>
+          <when test="fs=='C'.toString()">
+           content LIKE '%'||#{ss}||'%'
+          </when>
+         </choose>
+       </trim>
+      </foreach>
+     </trim>
+   </select>
 </mapper>

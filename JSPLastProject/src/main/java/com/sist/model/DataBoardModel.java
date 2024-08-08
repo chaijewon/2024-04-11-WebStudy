@@ -247,4 +247,57 @@ public class DataBoardModel {
 	  }catch(Exception ex){}
 	  return "redirect:../databoard/list.do";
   }
+  /*@RequestMapping("databoard/find.do")
+  public String databoard_find(HttpServletRequest request,HttpServletResponse response)
+  {
+	  try
+	  {
+		  request.setCharacterEncoding("UTF-8");
+	  }catch(Exception ex) {}
+	  String fs=request.getParameter("fs");
+	  String ss=request.getParameter("ss");
+	  // 데이터베이스 연동 
+	  Map map=new HashMap();
+	  map.put("ss", ss);
+	  map.put("fs", fs);
+	  // 데이터 전송 (결과값)
+	  List<DataBoardVO> list=DataBoardDAO.databoardFindData(map);
+	  request.setAttribute("list", list);
+	  request.setAttribute("main_jsp", "../databoard/find.jsp");
+	  return "../main/main.jsp";
+  }*/
+  /*
+   *  사용자 요청값 전송 
+   *  ============
+   *   목록 => 페이지 
+   *   상세보기 => 해당 게시물 ,맛집에 대한 고유번호 
+   *   검색 => 검색어 , 페이지 
+   *   로그인 => 아이디, Pwd
+   *   ==================================
+   *   목록 => List
+   *   상세보기 => VO
+   *   검색 => List
+   *   로그인 => String 
+   */
+  @RequestMapping("databoard/find.do")
+  public String databoard_find(HttpServletRequest request,HttpServletResponse response)
+  {
+	  try
+	  {
+		  request.setCharacterEncoding("UTF-8");
+	  }catch(Exception ex) {}
+	  
+	  String[] fsArr=request.getParameterValues("fs");
+	  String ss=request.getParameter("ss");
+	  Map map=new HashMap();
+	  map.put("fsArr", fsArr);
+	  map.put("ss", ss);
+	  // 데이터베이스 연동 
+	  List<DataBoardVO> list=DataBoardDAO.databoardFindData(map);
+	  // 결과값 전송 
+	  request.setAttribute("list", list);
+	  request.setAttribute("main_jsp", "../databoard/find.jsp");
+	  return "../main/main.jsp";
+  }
+  
 }

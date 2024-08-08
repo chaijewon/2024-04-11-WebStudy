@@ -244,4 +244,31 @@ public class DataBoardDAO {
 				  session.close(); // 반환 (DBCP사용)
 		  }
    }
+   /*
+    *   <select id="databoardFindData" resultType="DataBoardVO" parameterType="hashmap">
+		    SELECT no,name,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+		    FROM project_databoard
+		    WHERE ${fs} LIKE '%'||#{ss}||'%'
+		   </select>
+    */
+   public static List<DataBoardVO> databoardFindData(Map map)
+   {
+	   List<DataBoardVO> list=new ArrayList<DataBoardVO>();
+	   SqlSession session=null;
+		  try
+		  {
+			  session=ssf.openSession(true); 
+			  list=session.selectList("databoardFindData",map);
+			  
+		  }catch(Exception ex)
+		  {
+			  ex.printStackTrace();
+		  }
+		  finally
+		  {
+			  if(session!=null)
+				  session.close(); // 반환 (DBCP사용)
+		  }
+	   return list;
+   }
 }
