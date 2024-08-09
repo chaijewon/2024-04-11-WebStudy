@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+     MNO                                       NOT NULL NUMBER
+	 TITLE                                     NOT NULL VARCHAR2(2000)
+	 SINGER                                    NOT NULL VARCHAR2(2000)
+	 ALBUM                                              VARCHAR2(2000)
+	 POSTER                                    NOT NULL VARCHAR2(300)
+	 STATE                                              CHAR(12)
+	 IDCREMENT                                          NUMBER
+	 KEY                                                VARCHAR2(200)
+ -->
 <mapper namespace="com.sist.mapper.music-mapper">
-  
+  <select id="musicListData" resultType="MusicVO">
+    SELECT mno,title,singer,poster,album,state,idcrement
+    FROM genie_music
+    ORDER BY mno ASC
+  </select>
+  <select id="musicFindData" resultType="MusicVO" parameterType="hashmap">
+    SELECT mno,title,singer,poster,album,state,idcrement
+    FROM genie_music
+    WHERE ${column} LIKE '%'||#{ss}||'%'
+    ORDER BY mno ASC
+  </select>
+  <select id="musicDetailData" resultType="String" parameterType="int">
+    SELECT key FROM genie_music
+    WHERE mno=#{mno}
+  </select>
 </mapper>

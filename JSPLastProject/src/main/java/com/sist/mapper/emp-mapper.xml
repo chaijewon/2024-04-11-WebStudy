@@ -42,7 +42,7 @@
    <select id="empFindData" resultType="EmpVO" parameterType="hashmap">
      SELECT empno,ename,job,TO_CHAR(hiredate,'YYYY-MM-DD') as dbday,
             sal,deptno,comm
-     FROM emp
+     FROM emp 
      <!-- 
         WHERE ename IN('','','','',''...)
         
@@ -69,6 +69,41 @@
        [CLARK, JONES, ALLEN, TURNER, WARD, FORD, SMITH, SCOTT, ADAMS, MILLER]
        
        IN연산자 = <foreach>
+       
+       동적 쿼리 
+         <trim> : 추가 / 제거 
+                  WHERE ename (추가)
+                  <trim prefix="LIKE">
+                  WHERE ename LIKE '%'||#{name}||'%' OR
+                  <trim suffixOverrides="OR">
+                        ================ 제거 
+         <foreach> : => IN(여기에 들어가는 데이터)
+           <foreach collection="nameArr" item="name" close=")" separator="," open="(">
+                    ==================== =========== ========= ==============
+                          |                  값 읽기     끝나면 )       데이터,데이터..  (
+                        배열 / List => Map => 키명
+                     for(String name:배열)
+                         =========== ===
+                           item      collection
+         <if> : 조건문 
+                <if test="조건문">
+                  수행할 SQL문장
+                </if>
+         <choose> : 다중 조건문 
+             <choose>
+               <when test="조건문">SQL</when>
+               <when test="조건문">SQL</when>
+               <when test="조건문">SQL</when>
+               <when test="조건문">SQL</when>
+               <when test="조건문">SQL</when>
+               <otherwise>기타</otherwise>
+             </choose>
+         <where> : where문장 => WHERE
+         <set> : UPDATE 
+         
+         FROM emp WHERE ename IN('','',...)
+         동적 쿼리 => 사용자의 요청에 따라 SQL문장을 변경 
+         *** MyBatis의 핵심 
       -->
       <trim prefix="WHERE ename IN(" suffix=")" suffixOverrides=")">
         <foreach collection="nameArr" item="name" close=")" separator=",">

@@ -70,7 +70,86 @@
 			}
 		 })
 	 })
+	 
+	 // 댓글 읽기
+	 let bno=$('.del_no').text()
+	 replyList(bno)
+	 // 댓글 쓰기
+	 $('#writeBtn').click(function(){
+		 //alert("Call...")
+		 let msg=$('#msg').val()
+		 console.log(msg)
+		 let bno=$('.del_no').text()
+		 console.log(bno)
+		 if(msg.trim()==="")
+		 {
+			 $('#msg').focus()
+			 return
+		 }
+		 $.ajax({
+			 type:'post',
+			 url:'../reply/reply_insert.do',
+			 data:{"bno":bno,"msg":msg},
+			 success:function(result)
+			 {
+				 let res=result
+				 console.log(res)
+				 if(res==='OK')
+				 {
+					 replyList(bno)
+				 }
+				 
+			 },
+			 error:function(request,status,error)
+			 {
+				 console.log(error)
+			 }
+		 })
+	 })
+	 // 댓글 수정 
+	 // 댓글 삭제
  })
+ function replyList(bno)
+ {
+	 $.ajax({
+		 type:'post',
+		 url:'../reply/reply_list.do',
+		 data:{"bno":bno},
+		 success:function(json)
+		 {
+			 json=JSON.parse(json)
+			 let html=''
+			 
+			 json.map(function(reply){
+				 //for(let reply of json){
+				 html+='<table class="table">'
+					 html+='<tr>'
+					 html+='<td class="text-left">◑'+reply.name+'('+reply.day+')</td>'
+					 html+='<td class="text-right">'
+				      if(reply.id===reply.sessionId)
+				      {
+				    	  html+='<span class="btn btn-xs btn-success">수정</span>&nbsp;' 
+				    	  html+='<a href="#" class="btn btn-xs btn-warning">삭제</a>' 
+				      }
+					 html+='</td>'
+					 html+='</tr>'
+					 html+='<tr>'
+					 html+='<td colspan="2">'
+					 html+='<pre style="white-space:pre-wrap;border:none;background:white">'+reply.msg+'</pre>'
+					 html+='</td>'
+					 html+='</tr>'
+					 html+='</table>'
+				 //}
+			 })
+			 console.log(html)
+			 $('#reply').html(html)
+		 },
+		 error:function(request,status,error)
+		 {
+			 console.log(error)
+		 }
+	 })
+ }
  </script>
 </head>
 <body>
@@ -124,6 +203,22 @@
          </td>
        </tr>
      </table>
+     <div style="height: 20px"></div>
+     <table class="table">
+      <tr>
+       <td id="reply"></td>
+      </tr>
+     </table>
+     <c:if test="${sessionScope.id!=null }">
+     <table class="table">
+       <tr>
+        <td>
+         <textarea rows="4" cols="70" id="msg" style="float: left"></textarea>
+         <input type=button value="댓글쓰기" style="width: 100px;height: 85px;background-color: green;color:black" id="writeBtn">
+        </td>
+       </tr>
+     </table>
+     </c:if>
    </div>
   </main>
 </div>
