@@ -91,6 +91,10 @@
     DELETE FROM project_databoard
     WHERE no=#{no}
    </delete>
+   <delete id="databoardReplyDelete" parameterType="int">
+    DELETE FROM project_board_reply
+    WHERE bno=#{no}
+   </delete>
    <!-- *** 동적 쿼리 : 검색 
         ${} => 문자열 => 컬럼/테이블명 지정 => ''사용하지 않는다 
         #{} => 문자열 => 일반 데이터 => '' 사용 

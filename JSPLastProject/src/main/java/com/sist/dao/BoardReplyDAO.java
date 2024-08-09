@@ -64,4 +64,52 @@ public class BoardReplyDAO {
 			  session.close();
 	  }
   }
+  /*
+   *   <delete id="replyDelete" parameterType="int">
+		  DELETE FROM project_board_reply 
+		  WHERE rno=#{rno}
+		 </delete>
+   */
+  public static void replyDelete(int rno)
+  {
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession(true);
+		  session.delete("replyDelete",rno);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+  }
+  /*
+   *  <update id="replyUpdate" parameterType="BoardReplyVO">
+		  UPDATE project_board_reply SET
+		  msg=#{msg}
+		  WHERE rno=#{rno}
+		 </update>
+   */
+  public static void replyUpdate(BoardReplyVO vo)
+  {
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession(true);
+		  session.update("replyUpdate",vo);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+  }
+  
 }
