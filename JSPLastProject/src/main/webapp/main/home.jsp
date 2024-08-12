@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,47 @@
         </article>
       </li>
     </ul>
-    <h2 class="sectiontitle">Lorem Ipsum Dolor</h2>
+    
+    <h2 class="sectiontitle">인기 맛집 Top9</h2>
+    <div class="flexslider carousel basiccarousel btmspace-80">
+      <ul class="slides">
+       <c:forEach var="vo" items="${hitList }">
+	        <li>
+	          <figure><img class="radius-10 btmspace-10" src="http://menupan.com${vo.poster }" style="width: 320px;height: 185px">
+	            <figcaption><a href="#">${vo.name }</a></figcaption>
+	          </figure>
+	        </li>
+        </c:forEach>
+      </ul>
+    </div>
+    
+    <h2 class="sectiontitle">좋아요가 많은 맛집</h2>
+    <div class="flexslider carousel basiccarousel btmspace-80">
+      <ul class="slides">
+        <c:forEach var="vo" items="${likeList }">
+	        <li>
+	          <figure><img class="radius-10 btmspace-10" src="http://menupan.com${vo.poster }" style="width: 320px;height: 185px">
+	            <figcaption><a href="#">${vo.name }</a></figcaption>
+	          </figure>
+	        </li>
+        </c:forEach>
+      </ul>
+    </div>
+    
+    <h2 class="sectiontitle">찜이 많은 맛집</h2>
+    <div class="flexslider carousel basiccarousel btmspace-80">
+      <ul class="slides">
+        <c:forEach var="vo" items="${jjimList }">
+	        <li>
+	          <figure><img class="radius-10 btmspace-10" src="http://menupan.com${vo.poster }" style="width: 320px;height: 185px">
+	            <figcaption><a href="#">${vo.name }</a></figcaption>
+	          </figure>
+	        </li>
+        </c:forEach>
+      </ul>
+    </div>
+    
+    <h2 class="sectiontitle">최근 방문 맛집</h2>
     <div class="flexslider carousel basiccarousel btmspace-80">
       <ul class="slides">
         <li>
@@ -74,21 +115,7 @@
         </li>
       </ul>
     </div>
-    <h2 class="sectiontitle">Lorem Ipsum Dolor</h2>
-    <ul class="nospace group">
-      <li class="one_half first">
-        <article><img class="imgl radius-10" src="../images/demo/100x100.gif" alt="">
-          <h6 class="heading"><a href="#">Lorem Ipsum Dolor</a></h6>
-          <p>Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet.</p>
-        </article>
-      </li>
-      <li class="one_half">
-        <article><img class="imgl radius-10" src="../images/demo/100x100.gif" alt="">
-          <h6 class="heading"><a href="#">Lorem Ipsum Dolor</a></h6>
-          <p>Aenean semper elementum tellus, ut placerat leo. Quisque vehicula, urna sit amet.</p>
-        </article>
-      </li>
-    </ul>
+    
     <!-- / main body -->
     <div class="clear"></div>
   </main>

@@ -120,6 +120,7 @@ $(function(){
       </c:if>
       <li><a class="drop" href="#">맛집</a>
         <ul>
+          <li><a href="../food/list.do">맛집목록</a></li>
           <li><a href="pages/gallery.html">맛집찾기</a></li>
           <c:if test="${sessionScope.id!=null }">
             <li><a href="pages/full-width.html">맛집예약</a></li>

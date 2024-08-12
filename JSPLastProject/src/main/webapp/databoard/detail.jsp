@@ -267,7 +267,7 @@
      <table class="table">
        <tr>
         <td>
-         <textarea rows="4" cols="70" id="msg" style="float: left"></textarea>
+         <textarea rows="4" cols="100" id="msg" style="float: left"></textarea>
          <input type=button value="댓글쓰기" style="width: 100px;height: 85px;background-color: green;color:black" id="writeBtn">
         </td>
        </tr>
