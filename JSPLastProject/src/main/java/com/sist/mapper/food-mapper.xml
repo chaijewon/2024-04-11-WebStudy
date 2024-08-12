@@ -22,4 +22,70 @@
   <select id="foodListCount" resultType="int">
     SELECT COUNT(*) FROM project_food_house
   </select>
+  <!-- 맛집 목록 출력 -->
+  <select id="foodListData" resultType="FoodVO" parameterType="hashmap">
+    SELECT fno,name,poster,num
+    FROM (SELECT fno,name,poster,rownum as num 
+    FROM (SELECT /*+ INDEX_ASC(project_food_house fh_fno_pk)*/fno,name,poster 
+    FROM project_food_house))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="foodTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/20.0) FROM project_food_house
+  </select>
+  <!-- 맛집 상세보기 -->
+  <update id="foodHitIncrement" parameterType="int">
+    UPDATE project_food_house SET
+    hit=hit+1
+    WHERE fno=#{fno}
+  </update>
+  <!-- 
+     FNO                                       NOT NULL NUMBER
+ NAME                                      NOT NULL VARCHAR2(500)
+ TYPE                                      NOT NULL VARCHAR2(100)
+ PHONE                                     NOT NULL VARCHAR2(50)
+ ADDRESS                                   NOT NULL VARCHAR2(300)
+ SCORE                                              NUMBER(2,1)
+ THEME                                              CLOB
+ POSTER                                    NOT NULL VARCHAR2(500)
+ IMAGES                                             CLOB
+ TIME                                               VARCHAR2(50)
+ PARKING                                            VARCHAR2(500)
+ CONTENT                                            CLOB
+ RDAYS                                              VARCHAR2(300)
+ JJIMCOUNT                                          NUMBER
+ LIKECOUNT                                          NUMBER
+ HIT                                                NUMBER
+   -->
+  <select id="foodDetailData" resultType="FoodVO" parameterType="int">
+    SELECT fno,name,type,phone,address,score,theme,poster,images,time,parking,
+    content
+    FROM project_food_house
+    WHERE fno=#{fno}
+  </select>
+  <!-- 좋아요 -->
+  <!-- 찜 -->
+  <!-- 예약 -->
+  <!-- 댓글 -->
+  <!-- 인근 맛집 출력 -->
+  <select id="foodRearListData" resultType="FoodVO" parameterType="string">
+    SELECT fno,name,poster,address,rownum
+    FROM (SELECT fno,name,address,poster 
+    FROM project_food_house WHERE address LIKE '%'||#{ss}||'%' ORDER BY fno ASC)
+    WHERE rownum&lt;=6
+  </select>
+  <!--  맛집 찾기 -->
+  <select id="foodFindListData" resultType="FoodVO" parameterType="hashmap">
+    SELECT fno,name,poster,num
+    FROM (SELECT fno,name,poster,rownum as num 
+    FROM (SELECT /*+ INDEX_ASC(project_food_house fh_fno_pk)*/fno,name,poster 
+    FROM project_food_house WHERE address LIKE '%'||#{ss}||'%'))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="foodFindTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/20.0) FROM project_food_house
+    WHERE address LIKE '%'||#{ss}||'%'
+  </select>
+  
 </mapper>
+
