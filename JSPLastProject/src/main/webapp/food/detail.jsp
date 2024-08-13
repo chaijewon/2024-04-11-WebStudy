@@ -67,6 +67,42 @@ function replyDelete(rno,cno)
 		}
 	})
 }
+function replyUpdate(rno)
+{
+	$('.updates').hide()
+	$('#m'+rno).show()
+}
+function replyUpdateData(rno,cno)
+{
+	let msg=$('#msg'+rno).val()
+	if(msg.trim()==="")
+	{
+		$('#msg'+rno).focus()
+		return
+	}
+	$.ajax({
+		type:'post',
+		url:'../all_reply/update.do',
+		data:{"rno":rno,"msg":msg},
+		success:function(result)
+		{
+			if(result==='OK')
+			{
+				replyList(cno)
+				
+			}
+			else
+			{
+				alert(result)
+			}
+			$('#m'+rno).hide()
+		},
+		error:function(request,status,error)
+		{
+			console.log(error)
+		}
+	})
+}
 function replyList(cno)
  {
 	 $.ajax({
@@ -99,7 +135,7 @@ function replyList(cno)
 				     html+='<tr class="updates" id="m'+reply.rno+'" style="display:none">'
 				     html+='<td>'
 				     html+='<textarea rows="4" cols="70" id="msg'+reply.rno+'" style="float: left">'+reply.msg+'</textarea>'
-				     html+='<input type=button value="댓글수정" onclick="replyUpdataData('+reply.rno+')" style="width: 100px;height: 85px;background-color: green;color:black">'
+				     html+='<input type=button value="댓글수정" onclick="replyUpdateData('+reply.rno+','+reply.cno+')" style="width: 100px;height: 85px;background-color: green;color:black">'
 				     html+='</td>'
 				     html+='</tr>'
 					 html+='</table>'

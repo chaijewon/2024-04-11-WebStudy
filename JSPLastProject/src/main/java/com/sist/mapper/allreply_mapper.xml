@@ -17,4 +17,9 @@
    DELETE FROM all_reply
    WHERE rno=#{rno}
   </delete>
+  <update id="allReplyUpdate" parameterType="hashmap">
+    UPDATE all_reply SET
+    msg=#{msg}
+    WHERE rno=#{rno}
+  </update>
 </mapper>

@@ -113,4 +113,34 @@ public class AllReplyModel {
 		   out.write(result);
 	   }catch(Exception ex) {}
    }
+   @RequestMapping("all_reply/update.do")
+   public void all_reply_update(HttpServletRequest request,HttpServletResponse response)
+   {
+	   try
+	   {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception ex) {}
+	   String rno=request.getParameter("rno");
+	   String msg=request.getParameter("msg");
+	   
+	   String result="";
+	   try
+	   {
+		   Map map=new HashMap();
+		   map.put("rno", rno);
+		   map.put("msg", msg);
+		   AllReplyDAO.allReplyUpdate(map);
+		   result="OK";
+	   }catch(Exception ex)
+	   {
+		   result=ex.getMessage();
+	   }
+	   
+	   // Ajax로 전송 
+	   try
+	   {
+		   PrintWriter out=response.getWriter();
+		   out.write(result);
+	   }catch(Exception ex) {}
+   }
 }
