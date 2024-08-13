@@ -7,6 +7,91 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	// detail.do?fno=2&type=1
+	replyList(${param.fno})
+	$('#writeBtn').on('click',function(){
+		let msg=$('#msg').val()
+		if(msg.trim()==="")
+		{
+			$('#msg').focus()
+			return
+		}
+		let cno=$(this).attr("data-cno")
+		
+		$.ajax({
+			type:'post',
+			url:'../all_reply/insert.do',
+			data:{"cno":cno,"type":1,"msg":msg},
+			success:function(result)
+			{
+				if(result==='OK')
+				{
+					replyList(cno)
+				}
+				else
+				{
+					alert(result)
+				}
+			},
+			error:function(request,status,error)
+			{
+				console.log(error)
+			}
+		})
+	})
+})
+function replyList(cno)
+ {
+	 $.ajax({
+		 type:'post',
+		 url:'../all_reply/list.do',
+		 data:{"cno":cno,"type":1},
+		 success:function(json)
+		 {
+			 json=JSON.parse(json)
+			 let html=''
+			 
+			 json.map(function(reply){
+				 //for(let reply of json){
+				     html+='<table class="table">'
+					 html+='<tr>'
+					 html+='<td class="text-left">◑'+reply.name+'('+reply.dbday+')</td>'
+					 html+='<td class="text-right">'
+				      if(reply.id===reply.sessionId)
+				      {
+				    	  html+='<span class="btn btn-xs btn-success ups" onclick="replyUpdate('+reply.rno+')">수정</span>&nbsp;' 
+				    	  html+='<input type=button class="btn btn-xs btn-warning" value="삭제" onclick="replyDelete('+reply.rno+','+reply.cno+')">' 
+				      }
+					 html+='</td>'
+					 html+='</tr>'
+					 html+='<tr>'
+					 html+='<td colspan="2">'
+					 html+='<pre style="white-space:pre-wrap;border:none;background:white">'+reply.msg+'</pre>'
+					 html+='</td>'
+					 html+='</tr>'
+				     html+='<tr class="updates" id="m'+reply.rno+'" style="display:none">'
+				     html+='<td>'
+				     html+='<textarea rows="4" cols="70" id="msg'+reply.rno+'" style="float: left">'+reply.msg+'</textarea>'
+				     html+='<input type=button value="댓글수정" onclick="replyUpdataData('+reply.rno+')" style="width: 100px;height: 85px;background-color: green;color:black">'
+				     html+='</td>'
+				     html+='</tr>'
+					 html+='</table>'
+				 //}
+			 })
+			 console.log(html)
+			 $('#reply').html(html)
+			 $('#msg').val("")
+		 },
+		 error:function(request,status,error)
+		 {
+			 console.log(error)
+		 }
+	 })
+ }
+</script>
 </head>
 <body>
 <div class="wrapper row3">
@@ -73,10 +158,11 @@
         <td>${vo.content }</td>
        </tr>
      </table>
+     
      <div style="height: 10px"></div>
      <div id="map" style="width:100%;height:350px;"></div>
 
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9965c727d3306713c47391be682e4be9&libraries=services"></script>
+		
 		<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
@@ -115,6 +201,7 @@
 		    } 
 		});    
 		</script>
+		
 		<div style="height: 20px"></div>
 		<h2 class="sectiontitle">인근 맛집</h2>
 	    <div class="flexslider carousel basiccarousel btmspace-80">
@@ -130,6 +217,28 @@
 	        </c:forEach>
 	      </ul>
 	    </div>
+	    
+	    <div style="height: 20px"></div>
+	    <h2 class="sectiontitle">댓글</h2>
+	    <table class="table" id="reply_table">
+	      <tbody>
+	        <tr>
+	          <td id="reply">
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+	    <c:if test="${sessionScope.id!=null }">
+	     <table class="table">
+	       <tr>
+	        <td>
+	         <textarea rows="4" cols="100" id="msg" style="float: left"></textarea>
+	         <input type=button value="댓글쓰기" style="width: 100px;height: 85px;background-color: green;color:black" 
+	         id="writeBtn" data-cno="${vo.fno }">
+	        </td>
+	       </tr>
+	     </table>
+	    </c:if>
   </main>
 </div>
 </body>

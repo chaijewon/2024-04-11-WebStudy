@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9965c727d3306713c47391be682e4be9&libraries=services"></script>
 </head>
 <body id="top">
 <jsp:include page="header.jsp"></jsp:include>
@@ -14,7 +15,7 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a> 
 <!-- JAVASCRIPTS --> 
-<script src="../layout/scripts/jquery.min.js"></script> 
+<!-- <script src="../layout/scripts/jquery.min.js"></script>  -->
 <script src="../layout/scripts/jquery.backtotop.js"></script> 
 <script src="../layout/scripts/jquery.mobilemenu.js"></script> 
 <script src="../layout/scripts/jquery.flexslider-min.js"></script>

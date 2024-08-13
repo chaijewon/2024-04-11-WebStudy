@@ -14,6 +14,9 @@
      <typeAlias type="com.sist.vo.MusicVO" alias="MusicVO"/>
      <typeAlias type="com.sist.vo.BoardReplyVO" alias="BoardReplyVO"/>
      <typeAlias type="com.sist.vo.FoodVO" alias="FoodVO"/>
+     <typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
+     <typeAlias type="com.sist.vo.SeoulLocationVO" alias="SeoulLocationVO"/>
+     <typeAlias type="com.sist.vo.AllReplyVO" alias="AllReplyVO"/>
    </typeAliases>
    <!-- connection관련 : getConnection/disConnection -->
     <environments default="development">
@@ -35,5 +38,8 @@
      <mapper resource="com/sist/mapper/music-mapper.xml"/>
      <mapper resource="com/sist/mapper/reply-mapper.xml"/>
      <mapper resource="com/sist/mapper/food-mapper.xml"/>
+     <mapper resource="com/sist/mapper/goods-mapper.xml"/>
+     <mapper resource="com/sist/mapper/seoul-mapper.xml"/>
+     <mapper resource="com/sist/mapper/allreply_mapper.xml"/>
    </mappers>
 </configuration>

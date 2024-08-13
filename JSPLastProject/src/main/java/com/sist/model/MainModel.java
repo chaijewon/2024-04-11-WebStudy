@@ -40,6 +40,18 @@ public class MainModel {
 	    request.setAttribute("main_jsp", "../main/home.jsp");
 	    return "../main/main.jsp";
   }
+  @RequestMapping("mypage/mypage_main.do")
+  public String mypage_main(HttpServletRequest request,HttpServletResponse response)
+  {
+	  request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
+	  return "../main/main.jsp";
+  }
+  @RequestMapping("adminpage/adminpage_main.do")
+  public String adminpage_main(HttpServletRequest request,HttpServletResponse response)
+  {
+	  request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
+	  return "../main/main.jsp";
+  }
 }
 
 

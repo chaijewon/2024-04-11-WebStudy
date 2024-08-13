@@ -137,19 +137,19 @@ $(function(){
       </li>
       <li><a class="drop" href="#">스토어</a>
         <ul>
-          <li><a href="pages/gallery.html">전체상품</a></li>
-          <li><a href="pages/full-width.html">베스트상품</a></li>
-          <li><a href="pages/sidebar-left.html">특가상품</a></li>
+          <li><a href="../goods/list.do">전체상품</a></li>
+          <li><a href="../goods/list.do?cno=2">베스트상품</a></li>
+          <li><a href="../goods/list.do?cno=3">신상품</a></li>
+          <li><a href="../goods/list.do?cno=4">특가상품</a></li>
           <li><a href="pages/sidebar-left.html">가격비교</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">여행</a>
         <ul>
-          <li><a href="pages/gallery.html">명소</a></li>
-          <li><a href="pages/full-width.html">자연 & 관광</a></li>
-          <li><a href="pages/sidebar-left.html">호텔</a></li>
-          <li><a href="pages/sidebar-left.html">쇼핑</a></li>
-          <li><a href="pages/sidebar-left.html">날씨</a></li>
+          <li><a href="../seoul/location.do">명소</a></li>
+          <li><a href="../seoul/nature.do">자연 & 관광</a></li>
+          <li><a href="../seoul/shop.do">쇼핑</a></li>
+          <li><a href="../seoul/weather.do">날씨</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">커뮤니티</a>
@@ -167,10 +167,10 @@ $(function(){
       </li>
       <c:if test="${sessionScope.id!=null }">
        <c:if test="${sessionScope.admin=='n' }">
-        <li><a href="#">마이페이지</a></li>
+        <li><a href="../mypage/mypage_main.do">마이페이지</a></li>
        </c:if>
        <c:if test="${sessionScope.admin=='y' }">
-        <li><a href="#">관리자페이지</a></li>
+        <li><a href="../adminpage/adminpage_main.do">관리자페이지</a></li>
        </c:if>
       </c:if>
     </ul>
