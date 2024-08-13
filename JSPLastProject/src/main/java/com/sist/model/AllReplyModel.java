@@ -93,4 +93,24 @@ public class AllReplyModel {
 		   out.write(result);
 	   }catch(Exception ex) {}
    }
+   @RequestMapping("all_reply/delete.do")
+   public void all_reply_delete(HttpServletRequest request,HttpServletResponse response)
+   {
+	   String rno=request.getParameter("rno");
+	   String result="";
+	   try
+	   {
+		   AllReplyDAO.allReplyDelete(Integer.parseInt(rno));
+		   result="OK";
+	   }catch(Exception ex) 
+	   {
+		   result=ex.getMessage();
+	   }
+	   // Ajax로 전송 
+	   try
+	   {
+		   PrintWriter out=response.getWriter();
+		   out.write(result);
+	   }catch(Exception ex) {}
+   }
 }

@@ -13,4 +13,8 @@
     WHERE cno=#{cno} AND type=#{type}
     ORDER BY rno DESC
   </select>
+  <delete id="allReplyDelete" parameterType="int">
+   DELETE FROM all_reply
+   WHERE rno=#{rno}
+  </delete>
 </mapper>

@@ -43,6 +43,30 @@ $(function(){
 		})
 	})
 })
+// 삭제
+function replyDelete(rno,cno)
+{
+	$.ajax({
+		type:'post',
+		url:'../all_reply/delete.do',
+		data:{"rno":rno},
+		success:function(result)
+		{
+			if(result==="OK")
+			{
+				replyList(cno)
+			}
+			else
+			{
+				alert(result)
+			}
+		},
+		error:function(request,status,error)
+		{
+			console.log(error)
+		}
+	})
+}
 function replyList(cno)
  {
 	 $.ajax({
