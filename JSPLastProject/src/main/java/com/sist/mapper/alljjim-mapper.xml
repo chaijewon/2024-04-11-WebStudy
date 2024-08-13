@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.alljjim-mapper">
+ <!-- 
+    JNO     NOT NULL NUMBER       
+	CNO              NUMBER       
+	TYPE             NUMBER       
+	ID               VARCHAR2(20) 
+	REGDATE          DATE 
+  -->
+ <insert id="allJjimInsert" parameterType="hashmap">
+   INSERT INTO all_jjim VALUES(
+    (SELECT NVL(MAX(jno)+1,1) FROM all_jjim),
+    #{cno},#{type},#{id},SYSDATE
+   )
+ </insert>
+ 
+ <select id="allJjimCheck" resultType="int" parameterType="hashmap">
+   SELECT COUNT(*) FROM all_jjim
+   WHERE cno=#{cno} AND type=#{type} AND id=#{id}
+ </select>
+</mapper>

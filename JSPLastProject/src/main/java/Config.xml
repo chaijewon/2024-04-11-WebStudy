@@ -17,6 +17,7 @@
      <typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
      <typeAlias type="com.sist.vo.SeoulLocationVO" alias="SeoulLocationVO"/>
      <typeAlias type="com.sist.vo.AllReplyVO" alias="AllReplyVO"/>
+     <typeAlias type="com.sist.vo.AllJjimVO" alias="AllJjimVO"/>
    </typeAliases>
    <!-- connection관련 : getConnection/disConnection -->
     <environments default="development">
@@ -41,5 +42,6 @@
      <mapper resource="com/sist/mapper/goods-mapper.xml"/>
      <mapper resource="com/sist/mapper/seoul-mapper.xml"/>
      <mapper resource="com/sist/mapper/allreply_mapper.xml"/>
+     <mapper resource="com/sist/mapper/alljjim-mapper.xml"/>
    </mappers>
 </configuration>

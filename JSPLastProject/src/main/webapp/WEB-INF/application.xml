@@ -11,4 +11,5 @@
   <bean id="goods" class="com.sist.model.GoodsModel"/>
   <bean id="seoul" class="com.sist.model.SeoulModel"/>
   <bean id="allreply" class="com.sist.model.AllReplyModel"/>
+  <bean id="alljjim" class="com.sist.model.AllJjimModel"/>
 </beans>
