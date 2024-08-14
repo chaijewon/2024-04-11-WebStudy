@@ -31,6 +31,12 @@ public class MainModel {
 	    List<FoodVO> hitList=FoodDAO.foodHitTopData();
 	    List<FoodVO> likeList=FoodDAO.foodLikeTopData();
 	    List<FoodVO> jjimList=FoodDAO.foodJjimTopData();
+	    /*
+	     *   Footer에 공지사항 출력 
+	     */
+	    List<NoticeVO> footNList=NoticeDAO.noticeTop5Data();
+	    
+	    request.setAttribute("footNList", footNList);
 	    
 	    request.setAttribute("cookieList", cookieList);
 	    request.setAttribute("hitList", hitList);

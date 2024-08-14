@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h2 class="sectiontitle">묻고답하기</h2>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,15 +13,14 @@
     <div class="one_third first">
       <h6 class="title">공지사항</h6>
       <ul class="nospace linklist">
-        <li><a href="#">Home Page</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">Portfolio</a></li>
-        <li><a href="#">Contact Us</a></li>
+       <c:forEach var="vo" items="${footNList }">
+         <li><a href="#">${vo.subject }</a></li>
+       </c:forEach>
+        
       </ul>
     </div>
     <div class="one_third">
-      <h6 class="title">이벤트</h6>
+      <h6 class="title">인기 맛집</h6>
       <ul class="nospace linklist">
         <li><a href="#">Home Page</a></li>
         <li><a href="#">Blog</a></li>
@@ -30,7 +30,7 @@
       </ul>
     </div>
     <div class="one_third">
-      <h6 class="title">맛집뉴스</h6>
+      <h6 class="title">맛집 뉴스</h6>
       <ul class="nospace linklist">
         <li><a href="#">Home Page</a></li>
         <li><a href="#">Blog</a></li>

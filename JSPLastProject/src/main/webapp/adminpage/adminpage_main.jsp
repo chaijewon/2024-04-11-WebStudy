@@ -10,7 +10,6 @@
 <body>
 <div class="wrapper row3">
   <main class="container clear">
-   <h2 class="sectiontitle">관리자페이지</h2>
    <div class="one_quarter first">
 	   <div class="panel panel-primary">
 	    <div class="panel-heading">
@@ -18,16 +17,16 @@
 	    </div>
 	    <!-- 사이드바 메뉴목록1 -->
 	    <ul class="list-group">
-	      <li class="list-group-item"><a href="#">회원관리</a></li>
-	      <li class="list-group-item"><a href="#">공지사항관리</a></li>
+	      <li class="list-group-item"><a href="../adminpage/member_list.do">회원관리</a></li>
+	      <li class="list-group-item"><a href="../adminpage/notice_list.do">공지사항관리</a></li>
 	      <li class="list-group-item"><a href="#">구매관리</a></li>
 	      <li class="list-group-item"><a href="#">예약관리</a></li>
-	      <li class="list-group-item"><a href="#">묻고답하기관리</a></li>
+	      <li class="list-group-item"><a href="../adminpage/reply_list.do">묻고답하기관리</a></li>
 	    </ul>
 	   </div>
    </div>
    <div class="three_quarter">
-     
+     <jsp:include page="${admin_jsp }"></jsp:include>
    </div>
   </main>
 </div>

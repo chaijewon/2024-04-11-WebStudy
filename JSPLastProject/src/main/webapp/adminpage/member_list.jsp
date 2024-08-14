@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%--
+   1차 : 데이터베이스 SQL 
+        JSP => MVC 구동 
+        Ajax (Front) 
+        => 웹 흐름 
+        
+ --%>
+<h2 class="sectiontitle">회원관리</h2>
 </body>
 </html>
