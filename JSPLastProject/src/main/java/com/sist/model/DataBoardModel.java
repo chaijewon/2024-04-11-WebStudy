@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.vo.*;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.sist.commons.CommonsModel;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 public class DataBoardModel {
@@ -21,6 +22,7 @@ public class DataBoardModel {
   public String databoard_insert(HttpServletRequest request,HttpServletResponse response)
   {
 	  request.setAttribute("main_jsp", "../databoard/insert.jsp");
+	  CommonsModel.footerPrint(request);
 	  return "../main/main.jsp";
   }
   
@@ -93,6 +95,7 @@ public class DataBoardModel {
 	  // new SimpleDateFormat("yyyy-MM-dd").format(new Date())
 	  request.setAttribute("today", today);
 	  request.setAttribute("main_jsp", "../databoard/list.jsp");
+	  CommonsModel.footerPrint(request);
 	  return "../main/main.jsp";
   }
   @RequestMapping("databoard/detail.do")
@@ -103,6 +106,7 @@ public class DataBoardModel {
 	  DataBoardVO vo=DataBoardDAO.databoardDetailData(Integer.parseInt(no));
 	  request.setAttribute("vo", vo);
 	  request.setAttribute("main_jsp", "../databoard/detail.jsp");
+	  CommonsModel.footerPrint(request);
 	  return "../main/main.jsp";
   }
   @RequestMapping("databoard/download.do")
@@ -176,6 +180,7 @@ public class DataBoardModel {
 	  // 데이터를 request에 추가해서 jsp로 전송 
 	  request.setAttribute("vo", vo);
 	  request.setAttribute("main_jsp", "../databoard/update.jsp");
+	  CommonsModel.footerPrint(request);
 	  return "../main/main.jsp";
   }
   @RequestMapping("databoard/password_check.do")
@@ -297,6 +302,7 @@ public class DataBoardModel {
 	  // 결과값 전송 
 	  request.setAttribute("list", list);
 	  request.setAttribute("main_jsp", "../databoard/find.jsp");
+	  CommonsModel.footerPrint(request);
 	  return "../main/main.jsp";
   }
   

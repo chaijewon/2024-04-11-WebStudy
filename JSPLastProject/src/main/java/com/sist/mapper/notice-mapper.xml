@@ -21,7 +21,16 @@
    SELECT COUNT(*) FROM notice
  </select>
  <!-- 공지 상세보기 : user-->
+ <!-- 
+   private int no,type,hit;
+  private String name,subject,content,dbday,notice_type;
+  private Date regdate;
+  -->
  <!-- 공지 수정 admin-->
+ <select id="noticeUpdateData" resultType="NoticeVO" parameterType="int">
+   SELECT no,type,hit,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday FROM notice
+   WHERE no=#{no}
+ </select>
  <!-- 공지 삭제 admin-->
  <select id="noticeTop5Data" resultType="NoticeVO">
    SELECT no,type,subject,rownum

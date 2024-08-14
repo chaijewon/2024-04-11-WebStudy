@@ -4,10 +4,13 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sist.commons.CommonsModel;
 import com.sist.controller.RequestMapping;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
+
+import io.netty.util.internal.logging.CommonsLoggerFactory;
 public class MainModel {
   @RequestMapping("main/main.do")
   public String main_main(HttpServletRequest request,HttpServletResponse response)
@@ -34,10 +37,8 @@ public class MainModel {
 	    /*
 	     *   Footer에 공지사항 출력 
 	     */
-	    List<NoticeVO> footNList=NoticeDAO.noticeTop5Data();
 	    
-	    request.setAttribute("footNList", footNList);
-	    
+	    CommonsModel.footerPrint(request);
 	    request.setAttribute("cookieList", cookieList);
 	    request.setAttribute("hitList", hitList);
 	    request.setAttribute("likeList", likeList);
@@ -46,18 +47,7 @@ public class MainModel {
 	    request.setAttribute("main_jsp", "../main/home.jsp");
 	    return "../main/main.jsp";
   }
-  @RequestMapping("mypage/mypage_main.do")
-  public String mypage_main(HttpServletRequest request,HttpServletResponse response)
-  {
-	  request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
-	  return "../main/main.jsp";
-  }
-  @RequestMapping("adminpage/adminpage_main.do")
-  public String adminpage_main(HttpServletRequest request,HttpServletResponse response)
-  {
-	  request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
-	  return "../main/main.jsp";
-  }
+  
 }
 
 

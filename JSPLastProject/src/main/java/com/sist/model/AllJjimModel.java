@@ -25,6 +25,7 @@ public class AllJjimModel {
 	  try
 	  {
 	     AllJjimDAO.allJjimInsert(map);
+	     AllJjimDAO.JjimCountIncrement(map);
 	     result="OK";
 	  }catch(Exception ex)
 	  {

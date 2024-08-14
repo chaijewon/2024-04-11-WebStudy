@@ -4,6 +4,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sist.commons.CommonsModel;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -37,6 +38,7 @@ public class NoticeModel {
 	   request.setAttribute("count", count);
 	   request.setAttribute("noticeList", list);
 	   request.setAttribute("main_jsp", "../notice/list.jsp");
+	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
    }
 }

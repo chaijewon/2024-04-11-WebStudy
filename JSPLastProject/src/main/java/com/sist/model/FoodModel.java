@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sist.vo.*;
+import com.sist.commons.CommonsModel;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 public class FoodModel {
@@ -47,6 +48,7 @@ public class FoodModel {
 	   
 	   
 	   request.setAttribute("main_jsp", "../food/list.jsp");
+	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
    }
    @RequestMapping("food/detail_before.do")
@@ -103,6 +105,7 @@ public class FoodModel {
 	   
 	   
 	   request.setAttribute("main_jsp", "../food/detail.jsp");
+	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
    }
    // 검색 
@@ -149,6 +152,7 @@ public class FoodModel {
 	   request.setAttribute("ss", ss);
 	   // BLOCK별 처리 
 	   request.setAttribute("main_jsp", "../food/find.jsp");
+	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
    }
 }

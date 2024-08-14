@@ -121,5 +121,32 @@ public class NoticeDAO {
     	}
     	return list;
     }
+    // 수정 / => 상세보기 : hit
+    /*
+     *   <select id="noticeUpdateData" resultType="NoticeVO" parameterType="int">
+		   SELECT no,type,hit,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday FROM notice
+		   WHERE no=#{no}
+		 </select>
+     */
+    public static NoticeVO noticeUpdateData(int no)
+    {
+    	NoticeVO vo=new NoticeVO();
+    	SqlSession session=null;
+    	try
+    	{
+    		session=ssf.openSession();
+    		vo=session.selectOne("noticeUpdateData",no);
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		if(session!=null)
+    			session.close(); //DBCP => 반환 (재사용)
+    	}
+    	return vo;
+    }
+    
     
 }
