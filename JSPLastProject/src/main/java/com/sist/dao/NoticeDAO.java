@@ -147,6 +147,80 @@ public class NoticeDAO {
     	}
     	return vo;
     }
-    
-    
+    // 수정
+    /*
+     *   <update id="noticeUpdate" parameterType="NoticeVO">
+		   UPDATE notice SET
+		   type=#{type},subject=#{subject},content=#{content}
+		   WHERE no=#{no}
+		 </update>
+     */
+    public static void noticeUpdate(NoticeVO vo)
+    {
+    	SqlSession session=null;
+    	try
+    	{
+    		session=ssf.openSession(true);
+    		session.update("noticeUpdate",vo);
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		if(session!=null)
+    			session.close(); //DBCP => 반환 (재사용)
+    	}
+    }
+    /*
+     *   <delete id="noticeDelete" parameterType="int">
+		  DELETE FROM notice
+		  WHERE no=#{no}
+		 </delete>
+     */
+    public static void noticeDelete(int no)
+    {
+    	SqlSession session=null;
+    	try
+    	{
+    		session=ssf.openSession(true);
+    		session.delete("noticeDelete",no);
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		if(session!=null)
+    			session.close(); //DBCP => 반환 (재사용)
+    	}
+    }
+    /*
+     *   <update id="noticeHitIncrement" parameterType="int">
+		   UPDATE notice SET
+		   hit=hit+1
+		   WHERE no=#{no}
+		 </update>
+     */
+    public static NoticeVO noticeDetilData(int no)
+    {
+    	NoticeVO vo=new NoticeVO();
+    	SqlSession session=null;
+    	try
+    	{
+    		session=ssf.openSession();
+    		session.update("noticeHitIncrement",no);
+    		session.commit();
+    		vo=session.selectOne("noticeUpdateData",no);
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		if(session!=null)
+    			session.close(); //DBCP => 반환 (재사용)
+    	}
+    	return vo;
+    }
 }

@@ -75,7 +75,6 @@ public class AdminModel {
    @RequestMapping("adminpage/notice_insert_ok.do")
    public String notice_insert_ok(HttpServletRequest request,HttpServletResponse response)
    {
-	   System.out.println("insert_ok");
 	   try
 	   {
 		   request.setCharacterEncoding("UTF-8");
@@ -102,6 +101,35 @@ public class AdminModel {
 	   return "../main/main.jsp";
    }
    
+   @RequestMapping("adminpage/notice_update_ok.do")
+   public String notice_update_ok(HttpServletRequest request,HttpServletResponse response)
+   {
+	   try
+	   {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception ex) {}
+	   String type=request.getParameter("type");
+	   String subject=request.getParameter("subject");
+	   String content=request.getParameter("content");
+	   String no=request.getParameter("no");//update,delete
+	   NoticeVO vo=new NoticeVO();
+	   vo.setType(Integer.parseInt(type));
+	   vo.setSubject(subject);
+	   vo.setContent(content);
+	   vo.setNo(Integer.parseInt(no));
+	   // DB연동 
+	   NoticeDAO.noticeUpdate(vo);
+	   return "redirect:../adminpage/notice_list.do";
+   }
+   
+   @RequestMapping("adminpage/notice_delete.do")
+   public String notice_delete(HttpServletRequest request,HttpServletResponse response)
+   {
+	   String no=request.getParameter("no");
+	   //DB연동 
+	   NoticeDAO.noticeDelete(Integer.parseInt(no));
+	   return "redirect:../adminpage/notice_list.do";
+   }
    
    @RequestMapping("adminpage/reply_list.do")
    public String reply_list(HttpServletRequest request,HttpServletResponse response)

@@ -24,7 +24,7 @@
     <c:forEach var="vo" items="${noticeList }">
     <tr> 
      <td width="10%" class="text-center">${count }</td>
-     <td width="55%">[${vo.notice_type}]&nbsp;${vo.subject }</td>
+     <td width="55%"><a href="../notice/detail.do?no=${vo.no}">[${vo.notice_type}]&nbsp;${vo.subject }</a></td>
      <td width="10%" class="text-center">${vo.name }</td>
      <td width="15%" class="text-center">${vo.dbday }</td>
      <td width="10%" class="text-center">${vo.hit }</td>

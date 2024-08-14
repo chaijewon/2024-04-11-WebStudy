@@ -39,7 +39,7 @@
 	   </div>
    </div>
    <div class="three_quarter">
-     
+     <jsp:include page="${mypage_jsp }"></jsp:include>
    </div>
   </main>
 </div>

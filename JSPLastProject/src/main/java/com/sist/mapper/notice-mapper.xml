@@ -21,6 +21,11 @@
    SELECT COUNT(*) FROM notice
  </select>
  <!-- 공지 상세보기 : user-->
+ <update id="noticeHitIncrement" parameterType="int">
+   UPDATE notice SET
+   hit=hit+1
+   WHERE no=#{no}
+ </update>
  <!-- 
    private int no,type,hit;
   private String name,subject,content,dbday,notice_type;
@@ -31,7 +36,16 @@
    SELECT no,type,hit,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday FROM notice
    WHERE no=#{no}
  </select>
+ <update id="noticeUpdate" parameterType="NoticeVO">
+   UPDATE notice SET
+   type=#{type},subject=#{subject},content=#{content}
+   WHERE no=#{no}
+ </update>
  <!-- 공지 삭제 admin-->
+ <delete id="noticeDelete" parameterType="int">
+  DELETE FROM notice
+  WHERE no=#{no}
+ </delete>
  <select id="noticeTop5Data" resultType="NoticeVO">
    SELECT no,type,subject,rownum
    FROM (SELECT no,type,subject 

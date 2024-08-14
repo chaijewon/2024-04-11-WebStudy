@@ -25,6 +25,7 @@
      <th width=20% class="text-center">제목</th>
      <td width=80%>
       <input type=text name=subject class="input-sm" size=50 required value="${vo.subject }">
+      <input type=hidden name=no value="${vo.no }">
      </td>
    </tr>
    <tr>
