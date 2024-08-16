@@ -64,4 +64,5 @@ public class ReplyBoardModel {
 	   ReplyBoardDAO.replyBoardInsert(vo);
 	   return "redirect:../replyboard/list.do";// 재호출 
    }
+   
 }
