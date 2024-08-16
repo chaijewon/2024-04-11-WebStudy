@@ -26,12 +26,6 @@
       </td>
     </tr>
     <tr>
-      <th width=20% class="text-center">비밀번호</th>
-      <td width=80%>
-       <input type="password" size=10 class="input-sm">
-      </td>
-    </tr>
-    <tr>
      <td colspan="2" class="text-center inline">
        <button class="btn-sm btn-danger">등록</button>
        <input type=button value="취소" class="btn-sm btn-warning"
