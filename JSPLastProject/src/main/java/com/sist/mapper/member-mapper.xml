@@ -11,4 +11,42 @@
    SELECT * FROM project_member
    WHERE id=#{id}
  </select>
+ <!-- 
+     ID                                        NOT NULL VARCHAR2(20)
+	 PWD                                       NOT NULL VARCHAR2(10)
+	 NAME                                      NOT NULL VARCHAR2(51)
+	 SEX                                                CHAR(6)
+	 BIRTHDAY                                           VARCHAR2(10)
+	 POST                                      NOT NULL VARCHAR2(7)
+	 ADDR1                                     NOT NULL VARCHAR2(150)
+	 ADDR2                                              VARCHAR2(150)
+	 PHONE                                              VARCHAR2(13)
+	 EMAIL                                              VARCHAR2(100)
+	 CONTENT                                            CLOB
+	 REGDATE                                            DATE
+	 ADMIN                                              CHAR(1)
+  -->
+  <select id="memberUpdateData" resultType="MemberVO" parameterType="string">
+   SELECT id,name,sex,birthday,post,addr1,addr2,phone,email,content
+   FROM project_member
+   WHERE id=#{id}
+  </select>
+  <insert id="memberInsert" parameterType="MemberVO">
+   INSERT INTO project_member VALUES(
+     #{id},#{pwd},#{name},#{sex},#{birthday},#{post},
+     #{addr1},#{addr2},#{phone},#{email},#{content},SYSDATE,'n'
+   )
+  </insert>
+  <!-- 회원 수정  -->
+  <select id="memberGetPassword" resultType="string" parameterType="string">
+   SELECT pwd FROM project_member
+   WHERE id=#{id}
+  </select>
+  <update id="memberUpdate" parameterType="MemberVO">
+   UPDATE project_member SET 
+   name=#{name},birthday=#{birthday},post=#{post},
+   addr1=#{addr1},addr2=#{addr2},phone=#{phone},email=#{email},
+   content=#{content}
+   WHERE id=#{id}
+  </update>
 </mapper>

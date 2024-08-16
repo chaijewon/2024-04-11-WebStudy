@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2 class="sectiontitle">마이페이지 홈</h2>
+
 </body>
 </html>

@@ -52,4 +52,74 @@ public class MemberModel {
 	  CommonsModel.footerPrint(request);
 	  return "../main/main.jsp";
   }
+  @RequestMapping("member/idcheck.do")
+  public String member_idcheck(HttpServletRequest request,HttpServletResponse response)
+  {
+	  return "../member/idcheck.jsp";
+  }
+  @RequestMapping("member/idcheck_ok.do")
+  public void member_idcheck_ok(HttpServletRequest request,HttpServletResponse response)
+  {
+	  /*
+	   *    url:'../member/idcheck_ok.do',
+			data:{"id":id}
+	   */
+	  String id=request.getParameter("id");
+	  // DB연동 
+	  int count=MemberDAO.memberIdCheck(id);
+	  // Ajax로 값을 전송 => 0,1
+	  try
+	  {
+		  PrintWriter out=response.getWriter();
+		  out.write(String.valueOf(count));// 문자열 전송 
+	  }catch(Exception ex) {}
+  }
+  /*
+   *   ID                                        NOT NULL VARCHAR2(20)
+	 PWD                                       NOT NULL VARCHAR2(10)
+	 NAME                                      NOT NULL VARCHAR2(51)
+	 SEX                                                CHAR(6)
+	 BIRTHDAY                                           VARCHAR2(10)
+	 POST                                      NOT NULL VARCHAR2(7)
+	 ADDR1                                     NOT NULL VARCHAR2(150)
+	 ADDR2                                              VARCHAR2(150)
+	 PHONE                                              VARCHAR2(13)
+	 EMAIL                                              VARCHAR2(100)
+	 CONTENT                                            CLOB
+   */
+  @RequestMapping("member/join_ok.do")
+  public String member_join_ok(HttpServletRequest request,HttpServletResponse response)
+  {
+	  try
+	  {
+		  request.setCharacterEncoding("UTF-8");
+	  }catch(Exception ex) {}
+	  String id=request.getParameter("id");
+	  String pwd=request.getParameter("pwd");
+	  String name=request.getParameter("name");
+	  String sex=request.getParameter("sex");
+	  String birthday=request.getParameter("birthday");
+	  String post=request.getParameter("post");
+	  String addr1=request.getParameter("addr1");
+	  String addr2=request.getParameter("addr2");
+	  String email=request.getParameter("email");
+	  String content=request.getParameter("content");
+	  String phone1=request.getParameter("phone1");
+	  String phone2=request.getParameter("phone2");
+	  
+	  MemberVO vo=new MemberVO();
+	  vo.setId(id);
+	  vo.setPwd(pwd);
+	  vo.setName(name);
+	  vo.setSex(sex);
+	  vo.setEmail(email);
+	  vo.setBirthday(birthday);
+	  vo.setPost(post);
+	  vo.setAddr1(addr1);
+	  vo.setAddr2(addr2);
+	  vo.setContent(content);
+	  vo.setPhone(phone1+")"+phone2);
+	  MemberDAO.memberInsert(vo);
+	  return "redirect:../main/main.do";
+  }
 }

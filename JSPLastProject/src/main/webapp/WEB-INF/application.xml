@@ -15,4 +15,6 @@
   <bean id="notice" class="com.sist.model.NoticeModel"/>
   <bean id="admin" class="com.sist.model.AdminModel"/>
   <bean id="mypage" class="com.sist.model.MyPageModel"/>
+  <bean id="chat" class="com.sist.model.ChatModel"/>
+  <bean id="replyboard" class="com.sist.model.ReplyBoardModel"/>
 </beans>
