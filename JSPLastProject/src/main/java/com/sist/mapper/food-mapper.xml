@@ -86,6 +86,12 @@
     SELECT CEIL(COUNT(*)/20.0) FROM project_food_house
     WHERE address LIKE '%'||#{ss}||'%'
   </select>
-  
+  <!-- 예약 관련 -->
+  <select id="foodTypeAllData" resultType="FoodVO" parameterType="string">
+    SELECT fno,poster,name 
+    FROM project_food_house
+    WHERE type LIKE '%'||#{type}||'%'
+    ORDER BY fno ASC
+  </select>
 </mapper>
 
