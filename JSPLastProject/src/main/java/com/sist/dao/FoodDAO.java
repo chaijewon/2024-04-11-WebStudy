@@ -334,4 +334,104 @@ public class FoodDAO {
 	   }
 	   return rdays;
    }
+   /*
+    *   <select id="foodReserveTimeData" resultType="String" parameterType="int">
+		    SELECT time FROM reserve_date
+		    WHERE dno=#{dno}
+		  </select>
+		  <select id="foodTimeSelectData" resultType="String" parameterType="int">
+		    SELECT time FROM reserve_time
+		    WHERE tno=#{tno}
+		  </select>
+    */
+   public static String foodTimeSelectData(int tno)
+   {
+	   String times="";
+	   SqlSession session=null; //Connection
+	   try
+	   {
+		   session=ssf.openSession();
+		   times=session.selectOne("foodTimeSelectData", tno);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return times;
+   }
+   
+   public static String foodReserveTimeData(int dno)
+   {
+	   String times="";
+	   SqlSession session=null; //Connection
+	   try
+	   {
+		   session=ssf.openSession();
+		   times=session.selectOne("foodReserveTimeData", dno);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return times;
+   }
+   /*
+    *   <insert id="reserveInsert" parameterType="ReserveVO">
+		   INSERT INTO project_reserve(rno,id,fno,day,time,inwon)
+		   VALUES(pre_rno_seq.nextval,#{id},#{fno},#{day},#{time},#{inwon})
+		  </insert>
+    */
+   public static void reserveInsert(ReserveVO vo)
+   {
+	   SqlSession session=null; //Connection
+	   try
+	   {
+		   session=ssf.openSession(true);
+		   session.insert("reserveInsert", vo);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+   }
+   /*
+    * <select id="reserveMyPageData" resultType="ReserveVO" parameterType="string">
+	   SELECT rno,pr.fno,day,time,inwon,isok,pf.name,pf.poster,pf.address,pf.phone,
+	          TO_CHAR(regdate,'YYYY-MM-DD') as dbday
+	   FROM project_reserve pr,project_food_house pf
+	   WHERE pr.fno=pf.fno
+	   AND id=#{id}
+	  </select>
+    */
+   public static List<ReserveVO> reserveMyPageData(String id)
+   {
+	   List<ReserveVO> list=new ArrayList<ReserveVO>();
+	   SqlSession session=null; //Connection
+	   try
+	   {
+		   session=ssf.openSession(true);
+		   list=session.selectList("reserveMyPageData", id);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return list;
+   }
 }

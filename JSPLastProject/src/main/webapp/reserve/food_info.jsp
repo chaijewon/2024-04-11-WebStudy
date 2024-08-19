@@ -39,6 +39,8 @@ $(function(){
 			$('#food_poster').attr("src",poster)
 			$('#food_name').text(name)
 			$('#food_phone').text(phone)
+			
+			$('#r_fno').val(fno)
 		},
 		error:function(request,status,error)
 		{

@@ -13,10 +13,11 @@ $(function(){
 	$('#year').change(function(){
 		let year=$('#year').val()
 		let month=$('#month').val()
+		let fno=${fno}
 		$.ajax({
 		type:'post',
 		url:'../reserve/date_info.do',
-		data:{"year":year,"month":month},
+		data:{"year":year,"month":month,"fno":fno},
 		success:function(result)
 		{
 			$('#rdate').html(result)
@@ -30,10 +31,11 @@ $(function(){
 	$('#month').change(function(){
 		let year=$('#year').val()
 		let month=$('#month').val()
+		let fno=${fno}
 		$.ajax({
 		type:'post',
 		url:'../reserve/date_info.do',
-		data:{"year":year,"month":month},
+		data:{"year":year,"month":month,"fno":fno},
 		success:function(result)
 		{
 			$('#rdate').html(result)
@@ -51,6 +53,20 @@ $(function(){
 		let day=$(this).attr("data-day")
 		let rday=year+"년도 "+month+"월 "+day+"일"
 		$('#food_day').text(rday)
+		$.ajax({
+			type:'post',
+			url:'../reserve/time_info.do',
+			data:{"day":day},
+			success:function(result)
+			{
+				$('#food_time').html(result)
+				$('#r_date').val(year+"-"+month+"-"+day)
+			},
+			error:function(request,status,error)
+			{
+				console.log(error)
+			}
+		})
 	})
 	
 })
