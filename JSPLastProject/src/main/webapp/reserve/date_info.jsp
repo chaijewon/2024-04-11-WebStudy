@@ -44,8 +44,22 @@ $(function(){
 		}
 	   })
 	})
+	
+	$('.rday_can').click(function(){
+		let year=$(this).attr("data-year")
+		let month=$(this).attr("data-month")
+		let day=$(this).attr("data-day")
+		let rday=year+"년도 "+month+"월 "+day+"일"
+		$('#food_day').text(rday)
+	})
+	
 })
 </script>
+<style type="text/css">
+.rday_can:hover{
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
   <table class="table">
@@ -93,7 +107,19 @@ $(function(){
           <td class="text-center" height="35">&nbsp;</td>
         </c:forEach>
       </c:if>
-      <td class="text-center ${day==i?'danger':'' }" height="35">${i }</td>
+      
+      <c:if test="${rday[i]==1 }">
+	      <td class="text-center success ${day==i?'danger':'' }" height="35">
+	      <span class="rday_can" style="font-weight: bold;" 
+	      data-year="${year }" data-month="${ month}" data-day="${i }">${i }</span>
+	      </td>
+      </c:if>
+      <c:if test="${rday[i]==0 }">
+	      <td class="text-center ${day==i?'danger':'' }" height="35">
+	       <span style="color: gray">${i }</span>
+	      </td>
+      </c:if>
+      
       <c:set var="week" value="${week+1 }"/>
       <c:if test="${week>6 }">
        <c:set var="week" value="0"/>

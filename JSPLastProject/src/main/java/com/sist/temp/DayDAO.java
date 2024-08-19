@@ -85,4 +85,23 @@ public class DayDAO {
 		  disConnection();
 	  }
   }
+  public void timeInsert(int dno,String time)
+  {
+	  try
+	  {
+		  getConnection();
+		  String sql="INSERT INTO reserve_date VALUES(?,?)";
+		  ps=conn.prepareStatement(sql);
+		  ps.setInt(1, dno);
+		  ps.setString(2, time);
+		  ps.executeUpdate();
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  disConnection();
+	  }
+  }
 }

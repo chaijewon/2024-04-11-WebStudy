@@ -88,10 +88,14 @@
   </select>
   <!-- 예약 관련 -->
   <select id="foodTypeAllData" resultType="FoodVO" parameterType="string">
-    SELECT fno,poster,name 
+    SELECT fno,poster,name,phone 
     FROM project_food_house
     WHERE type LIKE '%'||#{type}||'%'
     ORDER BY fno ASC
+  </select>
+  <select id="foodReserveDayData" resultType="String" parameterType="int">
+    SELECT rdays FROM project_food_house
+    WHERE fno=#{fno}
   </select>
 </mapper>
 

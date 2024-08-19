@@ -10,18 +10,20 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
+	
 	$.ajax({
 		type:'post',
-		url:'../reserve/date_info.do',
+		url:'../reserve/food_info.do',
 		success:function(result)
 		{
-			$('#rdate').html(result)
+			$('#food_list').html(result)
 		},
 		error:function(request,status,error)
 		{
 			console.log(error)
 		}
 	})
+	// https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5R6QRNst_kdWB8R08hMQMSDNVflcIzrZwQQ&s
 })
 </script>
 <body>
@@ -33,6 +35,13 @@ $(function(){
       <td width=30% class="danger" height="400">
        <table class="table">
         <caption><h4 class="text-center">맛집 정보</h4></caption>
+        <tr>
+          <td>
+           <div id="food_list" style="height: 400px;overflow-y:scroll">
+           
+           </div>
+          </td>
+        </tr>
        </table>
       </td>
       <td width=30% class="info" height="400">
@@ -48,6 +57,23 @@ $(function(){
       <td width=20% rowspan="2" class="success" height="500">
        <table class="table">
         <caption><h4 class="text-center">예약정보</h4></caption>
+        <tr>
+         <td class="text-center" colspan="2">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5R6QRNst_kdWB8R08hMQMSDNVflcIzrZwQQ&s" style="width:250px;height: 180px" id="food_poster">
+         </td>
+        </tr>
+        <tr>
+          <td width="30%" class="text-right">업체명</td>
+          <td width="70%" id="food_name"></td>
+        </tr>
+        <tr>
+          <td width="30%" class="text-right">전화</td>
+          <td width="70%" id="food_phone"></td>
+        </tr>
+        <tr>
+          <td width="30%" class="text-right">예약일</td>
+          <td width="70%" id="food_day"></td>
+        </tr>
        </table>
       </td>
     </tr>
