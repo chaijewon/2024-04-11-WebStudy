@@ -170,6 +170,43 @@ public class MemberDAO {
 	  }
 	  return bCheck;
   }
+  /*
+   *   <select id="memberIdFindCount" resultType="int" parameterType="MemberVO">
+		   SELECT COUNT(*) FROM project_member
+		   WHERE name=#{name} AND email=#{email}
+		  </select>
+		  <select id="memberIdFindData" resultType="String" parameterType="MemberVO">
+		   SELECT RPAD(SUBSTR(id,1,2),LENGTH(id),'*') FROM project_member
+		   WHERE name=#{name} AND email=#{email}
+		  </select>
+   */
+  public static String memberIdFindData(MemberVO vo)
+  {
+	  String result="";
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  int count=session.selectOne("memberIdFindCount",vo);
+		  if(count==0)
+		  {
+			  result="no";
+		  }
+		  else
+		  {
+			  result=session.selectOne("memberIdFindData",vo);
+		  }
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return result;
+  }
 }
 
 

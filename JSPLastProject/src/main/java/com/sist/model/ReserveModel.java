@@ -4,12 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.sist.controller.RequestMapping;
 import com.sist.dao.FoodDAO;
 import com.sist.vo.FoodVO;
 import com.sist.vo.ReserveVO;
 
 import java.util.*;
+import java.io.PrintWriter;
 import java.text.*;
 public class ReserveModel {
   @RequestMapping("reserve/reserve_main.do") // if과 동일한 역할
@@ -146,6 +149,7 @@ public class ReserveModel {
 	  String id=(String)session.getAttribute("id");
 	  
 	  List<ReserveVO> list=FoodDAO.reserveMyPageData(id);
+	  request.setAttribute("title", "예약관리");
 	  request.setAttribute("recvList", list);
 	  request.setAttribute("mypage_jsp", "../mypage/mypage_reserve.jsp");
 	  request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
@@ -183,5 +187,62 @@ public class ReserveModel {
 	  
 	  //request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 	  return "redirect:../mypage/mypage_reserve.do";
+  }
+  @RequestMapping("adminpage/adminpage_reserve.do")
+  public String adminpage_reserve(HttpServletRequest request,HttpServletResponse response)
+  {
+	  List<ReserveVO> recvList=FoodDAO.reserveAdminPageData();
+	  request.setAttribute("recvList", recvList);
+	  request.setAttribute("admin_jsp", "../adminpage/adminpage_reserve.jsp");
+	  request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
+	  return "../main/main.jsp";
+  }
+  @RequestMapping("adminpage/adminpage_reserve_ok.do")
+  public String adminpage_reserve_ok(HttpServletRequest request,HttpServletResponse response)
+  {
+	  String rno=request.getParameter("rno");
+	  // 데이터베이스 연동 => 모든 데이터가 오라클에 존재 => 80%
+	  FoodDAO.reserveOk(Integer.parseInt(rno));
+	  return "redirect:../adminpage/adminpage_reserve.do";
+  }
+  @RequestMapping("mypage/mypage_reserve_cancel.do")
+  public String mypage_reserve_cancel(HttpServletRequest request,HttpServletResponse response)
+  {
+	  String rno=request.getParameter("rno");
+	  // 데이터베이스 연동 => 삭제 
+	  FoodDAO.reserveCancel(Integer.parseInt(rno));
+	  return "redirect:../mypage/mypage_reserve.do";
+  }
+  @RequestMapping("mypage/mypage_reserve_info.do")
+  public void mypage_reserve_info(HttpServletRequest request,HttpServletResponse response)
+  {
+	  String rno=request.getParameter("rno");
+	  // 데이터베이스 연동 
+	  /*
+	   *   rno,day,pr.time,inwon,pf.name,pf.poster,pf.address,phone,theme,score,content,
+		           TO_CHAR(redate,'YYYY-MM-DD HH24:MI:SS') as dbday
+	   */
+	  ReserveVO vo=FoodDAO.mypageReserveInfoData(Integer.parseInt(rno));
+	  // {rno:1....} => JSON:JavaScript Object Notation
+	  // 자바 = 자바스크립트 호환 => RestFul 
+	  JSONObject obj=new JSONObject();
+	  obj.put("rno", vo.getRno());
+	  obj.put("day", vo.getDay());
+	  obj.put("time", vo.getTime());
+	  obj.put("inwon", vo.getInwon());
+	  obj.put("name",vo.getFvo().getName());
+	  obj.put("poster","http://www.menupan.com"+vo.getFvo().getPoster());
+	  obj.put("theme",vo.getFvo().getTheme());
+	  obj.put("score",vo.getFvo().getScore());
+	  obj.put("content",vo.getFvo().getContent());
+	  obj.put("regdate",vo.getDbday());
+	  // Ajax 값을 전송 
+	  try
+	  {
+		  response.setContentType("text/plain;charset=UTF-8");
+		  // => text/html(HTML) , text/xml(XML) , text/plain(JSON)
+		  PrintWriter out=response.getWriter();
+		  out.write(obj.toJSONString());
+	  }catch(Exception ex) {}
   }
 }

@@ -49,4 +49,13 @@
    content=#{content}
    WHERE id=#{id}
   </update>
+  <!-- 아이디 찾기 -->
+  <select id="memberIdFindCount" resultType="int" parameterType="MemberVO">
+   SELECT COUNT(*) FROM project_member
+   WHERE name=#{name} AND email=#{email}
+  </select>
+  <select id="memberIdFindData" resultType="String" parameterType="MemberVO">
+   SELECT RPAD(SUBSTR(id,1,2),LENGTH(id),'*') FROM project_member
+   WHERE name=#{name} AND email=#{email}
+  </select>
 </mapper>

@@ -25,4 +25,41 @@
    jjimcount=(SELECT COUNT(*) FROM all_jjim WHERE type=#{type} AND cno=#{cno})
    WHERE fno=#{cno}
  </update>
+ <!-- 찜 관리  -->
+ <resultMap type="com.sist.vo.AllJjimVO" id="jjimMap">
+   <result property="fvo.name" column="name"/>
+   <!-- 
+         while(rs.next())
+         {
+            ReserveVO vo=new ReserveVO();
+            vo.getFvo().setName(rs.getString("name"))
+            ===================            =========
+                fvo.name                     name
+         }
+    -->
+   <result property="fvo.poster" column="poster"/>
+   <result property="fvo.address" column="address"/>
+   <result property="fvo.phone" column="phone"/>
+   <result property="fvo.theme" column="theme"/>
+   <result property="fvo.score" column="score"/>
+   <result property="fvo.content" column="content"/>
+  </resultMap>
+ <!-- 
+     JNO     NOT NULL NUMBER       
+	 CNO              NUMBER       
+	 TYPE             NUMBER    => 1 맛집 , 2 여행    
+	 ID               VARCHAR2(20) 
+	 REGDATE          DATE 
+  -->
+ <select id="JjimMyPageListData" resultMap="jjimMap" parameterType="string">
+   SELECT jno,cno,regdate,name,poster,address,phone
+   FROM all_jjim aj,project_food_house pf
+   WHERE aj.cno=pf.fno
+   AND id=#{id}
+   ORDER BY jno DESC
+ </select>
+ <delete id="JjjimCancel" parameterType="int">
+  DELETE FROM all_jjim
+  WHERE jno=#{jno}
+ </delete>
 </mapper>

@@ -122,4 +122,32 @@ public class MemberModel {
 	  MemberDAO.memberInsert(vo);
 	  return "redirect:../main/main.do";
   }
+  @RequestMapping("member/idfind.do")
+  public String member_idfind(HttpServletRequest request,HttpServletResponse response)
+  {
+	  request.setAttribute("main_jsp", "../member/idfind.jsp");
+	  return "../main/main.jsp";
+  }
+  @RequestMapping("member/idcheck_ok.do")
+  public void member_idfind_ok(HttpServletRequest request,HttpServletResponse response)
+  {
+	  try
+	  {
+		  request.setCharacterEncoding("UTF-8");
+	  }catch(Exception ex){}
+	  String name=request.getParameter("name");
+	  String email=request.getParameter("email");
+	  
+	  MemberVO vo=new MemberVO();
+	  vo.setName(name);
+	  vo.setEmail(email);
+	  // 데이터베이스 연동 
+	  String result=MemberDAO.memberIdFindData(vo);
+	  // Ajax로 값 전송 
+	  try
+	  {
+		  PrintWriter out=response.getWriter();
+		  out.write(result);
+	  }catch(Exception ex) {}
+  }
 }
