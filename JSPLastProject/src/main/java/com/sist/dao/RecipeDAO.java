@@ -98,4 +98,56 @@ public class RecipeDAO {
 	  }
 	  return vo;
   }
+  // chef 관련 
+  // 1. 목록 
+  /*
+   *    <select id="recipeChefListData" resultType="ChefVO" parameterType="hashmap">
+		   SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,num
+		   FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,rownum as num
+		   FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2
+		   FROM chef))
+		   WHERE num BETWEEN #{start} AND #{end}
+		 </select>
+		 <select id="recipeChefTotalPage" resultType="int">
+		   SELECT CEIL(COUNT(*)/50.0) FROM chef
+		 </select>
+   */
+  public static List<ChefVO> recipeChefListData(Map map)
+  {
+	  List<ChefVO> list=new ArrayList<ChefVO>();
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  list=session.selectList("recipeChefListData",map);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+          if(session!=null)
+        	  session.close();
+	  }
+	  return list;
+  }
+  public static int recipeChefTotalPage()
+  {
+	  int total=0;
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  total=session.selectOne("recipeChefTotalPage");
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+          if(session!=null)
+        	  session.close();
+	  }
+	  return total;
+  }
 }

@@ -25,5 +25,23 @@
    WHERE no=#{no}
  </select>
  <!-- 쉐프목록 -->
+ <!-- 
+    CHEF      NOT NULL VARCHAR2(100) 
+	POSTER             VARCHAR2(500) 
+	MEM_CONT1          VARCHAR2(100) 
+	MEM_CONT3          VARCHAR2(100) 
+	MEM_CONT7          VARCHAR2(100) 
+	MEM_CONT2          VARCHAR2(100)
+  -->
+ <select id="recipeChefListData" resultType="ChefVO" parameterType="hashmap">
+   SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,num
+   FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,rownum as num
+   FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2
+   FROM chef))
+   WHERE num BETWEEN #{start} AND #{end}
+ </select>
+ <select id="recipeChefTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/50.0) FROM chef
+ </select>
  <!-- 쉐프 레시피 목록 -->
 </mapper>
