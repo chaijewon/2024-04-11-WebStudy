@@ -150,4 +150,55 @@ public class RecipeDAO {
 	  }
 	  return total;
   }
+  /*
+   *   <select id="recipeChefMakeData" resultType="RecipeVO" parameterType="hashmap">
+		   SELECT no,title,poster,num
+		   FROM (SELECT no,title,poster,rownum as num
+		   FROM (SELECT + INDEX_ASC(recipe recipe_no_pk)no,title,poster
+		   FROM recipe WHERE chef=#{chef}))
+		   WHERE num BETWEEN #{start} AND #{end}
+		 </select>
+		 <select id="recipeChefMakeTotalPage" resultType="int" parameterType="string">
+		   SELECT CEIL(COUNT(*)/20.0) FROM recipe
+		   WHERE chef=#{chef}
+		 </select>
+   */
+  public static List<RecipeVO> recipeChefMakeData(Map map)
+  {
+	  List<RecipeVO> list=new ArrayList<RecipeVO>();
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  list=session.selectList("recipeChefMakeData",map);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+          if(session!=null)
+        	  session.close();
+	  }
+	  return list;
+  }
+  public static int recipeChefMakeTotalPage(String chef)
+  {
+	  int total=0;
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  total=session.selectOne("recipeChefMakeTotalPage",chef);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+          if(session!=null)
+        	  session.close();
+	  }
+	  return total;
+  }
 }

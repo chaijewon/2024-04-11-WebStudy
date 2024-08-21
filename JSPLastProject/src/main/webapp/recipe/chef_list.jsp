@@ -19,10 +19,14 @@
          <table class="table">
           <tr>
            <td width=30% class="text-center" rowspan="2">
-            <img src="${vo.poster }" style="width:100px;height: 100px" class="img-circle">
+            <a href="../recipe/chef_make.do?chef=${vo.chef }">
+             <img src="${vo.poster }" style="width:100px;height: 100px" class="img-circle">
+            </a>
            </td>
            <td colspan="4">
-             <h4 style="color:orange">${vo.chef }</h4>
+             <h4 style="color:orange">
+              <a href="../recipe/chef_make.do?chef=${vo.chef }">${vo.chef }</a>
+             </h4>
            </td>
           </tr>
           <tr>
@@ -33,6 +37,13 @@
           </tr>
          </table>
        </c:forEach>
+     </td>
+    </tr>
+    <tr>
+     <td class="text-center">
+      <a href="../recipe/chef_list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-danger">이전</a>
+       ${curpage } page / ${totalpage } pages
+      <a href="../recipe/chef_list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-danger">다음</a>
      </td>
     </tr>
    </table>
