@@ -207,6 +207,44 @@ public class MemberDAO {
 	  }
 	  return result;
   }
+  /*
+   *   <select id="memberPwdFindCount" resultType="int" parameterType="string">
+		   SELECT COUNT(*) FROM project_member
+		   WHERE id=#{id}
+		  </select>
+		  <select id="memberPwdFindData" resultType="String" parameterType="string">
+		   SELECT pwd FROM project_member
+		   WHERE id=#{id}
+		  </select>
+   */
+  public static String memberPwdFindData(String id)
+  {
+	  String result="";
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  int count=session.selectOne("memberPwdFindCount",id);
+		  if(count==0)
+		  {
+			  result="no";
+		  }
+		  else
+		  {
+			  String pwd=session.selectOne("memberPwdFindData",id);
+			  result=pwd;
+		  }
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return result;
+  }
 }
 
 

@@ -58,4 +58,13 @@
    SELECT RPAD(SUBSTR(id,1,2),LENGTH(id),'*') FROM project_member
    WHERE name=#{name} AND email=#{email}
   </select>
+  <!-- 비밀번호 찾기 -->
+  <select id="memberPwdFindCount" resultType="int" parameterType="string">
+   SELECT COUNT(*) FROM project_member
+   WHERE id=#{id}
+  </select>
+  <select id="memberPwdFindData" resultType="String" parameterType="string">
+   SELECT pwd FROM project_member
+   WHERE id=#{id}
+  </select>
 </mapper>

@@ -172,4 +172,34 @@ public class ReplyBoardDAO {
 	  }
 	  return vo;
   }
+  /*
+   *  <delete id="adminReplyDelete" parameterType="int">
+   DELETE FROM project_replyboard
+   WHERE no=#{no}
+  </delete>
+  <update id="adminReplyUpdate2" parameterType="int">
+    UPDATE project_replyboard SET 
+    isreply=0
+    WHERE no=#{no}
+  </update>
+   */
+  public static void adminReplyDelete(int no,int group_id)
+  {
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  session.delete("adminReplyDelete",group_id);
+		  session.update("adminReplyUpdate2",no);
+		  session.commit();
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+  }
 }

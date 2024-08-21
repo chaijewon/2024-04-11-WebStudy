@@ -199,5 +199,13 @@ public class AdminModel {
 	   
 	   return "redirect:../adminpage/reply_list.do";
    }
-   
+   @RequestMapping("adminpage/reply_delete.do")
+   public String reply_delete(HttpServletRequest request,HttpServletResponse response)
+   {
+	   String no=request.getParameter("no");
+	   String group_id=request.getParameter("group_id");
+	   //DB연동 
+	   ReplyBoardDAO.adminReplyDelete(Integer.parseInt(no),Integer.parseInt(group_id));
+	   return "redirect:../adminpage/reply_list.do";
+   }
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.sist.commons.CommonsModel;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
+import com.sist.manager.MailManager;
 import com.sist.vo.*;
 public class MemberModel {
   @RequestMapping("member/login.do")
@@ -144,6 +145,29 @@ public class MemberModel {
 	  // 데이터베이스 연동 
 	  String result=MemberDAO.memberIdFindData(vo);
 	  // Ajax로 값 전송 
+	  try
+	  {
+		  PrintWriter out=response.getWriter();
+		  out.write(result);
+	  }catch(Exception ex) {}
+  }
+  @RequestMapping("member/pwdfind.do")
+  public String member_pwdfind(HttpServletRequest request,HttpServletResponse response)
+  {
+	  request.setAttribute("main_jsp", "../member/pwdfind.jsp");
+	  return "../main/main.jsp";
+  }
+  @RequestMapping("member/pwdfind_ok.do")
+  public void member_pwdfind_ok(HttpServletRequest request,HttpServletResponse response)
+  {
+	  String id=request.getParameter("id");
+	  String result=MemberDAO.memberPwdFindData(id);
+	  if(!result.equals("no"))
+	  {
+		  MailManager m=new MailManager();
+		  m.mailSender(result);
+	  }
+	  
 	  try
 	  {
 		  PrintWriter out=response.getWriter();

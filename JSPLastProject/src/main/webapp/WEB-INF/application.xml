@@ -18,4 +18,5 @@
   <bean id="chat" class="com.sist.model.ChatModel"/>
   <bean id="replyboard" class="com.sist.model.ReplyBoardModel"/>
   <bean id="reserve" class="com.sist.model.ReserveModel"/>
+  <bean id="recipe" class="com.sist.model.RecipeModel"/>
 </beans>

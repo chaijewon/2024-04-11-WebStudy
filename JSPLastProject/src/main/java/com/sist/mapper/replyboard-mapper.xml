@@ -42,5 +42,14 @@
     WHERE no=#{no}
   </update>
   <!-- 등록 / 답변 => 삭제 -->
+  <delete id="adminReplyDelete" parameterType="int">
+   DELETE FROM project_replyboard
+   WHERE group_id=#{group_id} AND group_step=1
+  </delete>
+  <update id="adminReplyUpdate2" parameterType="int">
+    UPDATE project_replyboard SET 
+    isreply=0
+    WHERE no=#{no}
+  </update>
   <!-- 수정 -->
 </mapper>
