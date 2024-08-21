@@ -15,6 +15,15 @@
    WHERE no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipeDetail)
  </select>
  <!-- 레시피 상세보기 -->
+ <update id="recipeHitIncrement" parameterType="int">
+  UPDATE recipe SET 
+  hit=hit+1
+  WHERE no=#{no}
+ </update>
+ <select id="recipeDetailData" resultType="RecipeDetailVO" parameterType="int">
+   SELECT * FROM recipeDetail
+   WHERE no=#{no}
+ </select>
  <!-- 쉐프목록 -->
  <!-- 쉐프 레시피 목록 -->
 </mapper>

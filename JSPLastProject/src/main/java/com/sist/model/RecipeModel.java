@@ -44,4 +44,43 @@ public class RecipeModel {
 	  request.setAttribute("main_jsp", "../recipe/recipe_list.jsp");
 	  return "../main/main.jsp";
   }
+  // 
+  @RequestMapping("recipe/recipe_detail.do")
+  public String recipe_detail(HttpServletRequest request,HttpServletResponse response)
+  {
+	  // 사용자의 요청 정보 받기 => ?
+	  String no=request.getParameter("no");
+	  // 데이터 베이스 연동 
+	  RecipeDetailVO vo=RecipeDAO.recipeDetailData(Integer.parseInt(no));
+	  List<String> sList=new ArrayList<String>();
+	  List<String> iList=new ArrayList<String>();
+	  
+	  String[] temp=vo.getFoodmake().split("\n");
+	  /*
+	   *   "1.컵누들 스프와 후레이크를 넣고 뜨거운 물을 넣어요. 면이 잠길 정도면 적당해요.^https://recipe1.ezmember.co.kr/cache/recipe/2024/08/08/63b1c1893de0b820694a874018f6a9f91.jpg
+2.팬에 기름을 두르고 대파를 볶아요. 프라이팬 , 조리용스푼^https://recipe1.ezmember.co.kr/cache/recipe/2024/08/08/98c771b5a1bd92d27134366a28b4957e1.jpg
+3.파 향이 올라오면 달걀을 넣고 섞어요.^https://recipe1.ezmember.co.kr/cache/recipe/2024/08/08/e296a5122d5b9e37d3b36ae52532e98d1.jpg
+4.달걀 흰자가 익기 시작하면 밥과 컵누들을 부어 강불에서 볶아요. 조리용가위 컵누들은 가위로 잘게 갈라 넣어요.^https://recipe1.ezmember.co.kr/cache/recipe/2024/08/08/e1219e68ac6b0b3a44c7f87df0ae9bc01.jpg
+"
+	   */
+	  for(String fm:temp)
+	  {
+		  StringTokenizer st=new StringTokenizer(fm,"^");
+		  sList.add(st.nextToken());
+		  iList.add(st.nextToken());
+	  }
+	  /*
+	   *   대파 1/3대 구매,컵누들 매콤한맛 1개 구매,현미밥 1/2공기 구매,달걀 1개 구매,식용유 2숟가락 구매,물 뜨거운 물 160ml 구매,프라이팬구매,조리용스푼구매,조리용가위구매,접시구매
+	   */
+	  String s=vo.getData();
+	  s=s.replace("구매", "");
+	  vo.setData(s.trim());
+	  
+	  request.setAttribute("vo", vo);
+	  request.setAttribute("foodsList", sList);
+	  request.setAttribute("imgList", iList);
+	  
+	  request.setAttribute("main_jsp", "../recipe/recipe_detail.jsp");
+	  return "../main/main.jsp";
+  }
 }

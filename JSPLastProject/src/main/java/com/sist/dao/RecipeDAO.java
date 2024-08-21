@@ -65,4 +65,37 @@ public class RecipeDAO {
 	  }
 	  return count;
   }
+  // 상세보기 
+  /*
+   *   <update id="recipeHitIncrement" parameterType="int">
+		  UPDATE recipe SET 
+		  hit=hit+1
+		  WHERE no=#{no}
+		 </update>
+		 <select id="recipeDetailData" resultType="RecipeDetailVO" parameterType="int">
+		   SELECT * FROM recipeDetail
+		   WHERE no=#{no}
+		 </select>
+   */
+  public static RecipeDetailVO recipeDetailData(int no)
+  {
+	  RecipeDetailVO vo=new RecipeDetailVO();
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  session.update("recipeHitIncrement",no);// 조회수 증가 
+		  session.commit();
+		  vo=session.selectOne("recipeDetailData",no);//상세 데이터
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+          if(session!=null)
+        	  session.close();
+	  }
+	  return vo;
+  }
 }
