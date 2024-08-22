@@ -20,7 +20,7 @@
 	    <ul class="list-group">
 	      <li class="list-group-item"><a href="../member/join_update.do">회원수정</a></li>
 	      <li class="list-group-item"><a href="#">회원탈퇴</a></li>
-	      <li class="list-group-item"><a href="#">비밀번호 변경</a></li>
+	      <li class="list-group-item"><a href="../member/pwd_change.do">비밀번호 변경</a></li>
 	    </ul>
 	   </div>
 	   <div class="panel panel-warning">

@@ -245,6 +245,54 @@ public class MemberDAO {
 	  }
 	  return result;
   }
+  /*
+   *   비밀번호 수정 
+   *   <select id="pwdCheckData" resultType="int" parameterType="hashmap">
+		   SELECT COUNT(*) FROM project_member
+		   WHERE id=#{id} AND pwd=#{pwd}
+		  </select>
+		  <update id="pwdChange" parameterType="hashmap">
+		   UPDATE project_member SET
+		   pwd=#{pwd}
+		   WHERE id=#{id}
+		  </update>
+   */
+  public static int pwdCheckData(Map map)
+  {
+	  int count=0;
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  count=session.selectOne("pwdCheckData",map);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return count;
+  }
+  public static void pwdChange(Map map)
+  {
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession(true);
+		  session.update("pwdChange",map);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+  }
 }
 
 

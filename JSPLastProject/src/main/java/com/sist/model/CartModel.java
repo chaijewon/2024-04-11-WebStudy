@@ -94,7 +94,7 @@ public class CartModel {
 	  return "../main/main.jsp";
   }
   @RequestMapping("goods/buy_insert.do")
-  public String buy_insert(HttpServletRequest request,HttpServletResponse response)
+  public void buy_insert(HttpServletRequest request,HttpServletResponse response)
   {
 	  String gno=request.getParameter("gno");
 		/* String type=request.getParameter("type"); */
@@ -114,7 +114,29 @@ public class CartModel {
 	  
 	  CartDAO.buyInsert(vo);
 	  
-	  return "redirect:../mypage/mypage_buy.do";
+	  //JSON 
+	  String name=(String)session.getAttribute("name");
+	  String email=(String)session.getAttribute("email");
+	  String address=(String)session.getAttribute("address");
+	  String post=(String)session.getAttribute("post");
+	  String phone=(String)session.getAttribute("phone");
+	  
+	  JSONObject obj=new JSONObject();
+	  obj.put("name", name);
+	  obj.put("email", email);
+	  obj.put("address", address);
+	  obj.put("post", post);
+	  obj.put("phone", phone);
+	  
+	  PrintWriter out=null;
+	  try
+	  {
+		  out=response.getWriter();
+		  out.write(obj.toJSONString());
+	  }catch(Exception ex)
+	  {
+		  out.write("FAIL");
+	  }
   }
   @RequestMapping("mypage/mypage_buy.do")
   public String mypage_buy(HttpServletRequest request,HttpServletResponse response)

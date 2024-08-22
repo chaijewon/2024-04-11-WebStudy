@@ -67,4 +67,13 @@
    SELECT pwd FROM project_member
    WHERE id=#{id}
   </select>
+  <select id="pwdCheckData" resultType="int" parameterType="hashmap">
+   SELECT COUNT(*) FROM project_member
+   WHERE id=#{id} AND pwd=#{pwd}
+  </select>
+  <update id="pwdChange" parameterType="hashmap">
+   UPDATE project_member SET
+   pwd=#{pwd}
+   WHERE id=#{id}
+  </update>
 </mapper>

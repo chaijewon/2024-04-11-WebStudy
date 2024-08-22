@@ -35,7 +35,7 @@
         	$('.buyBtn').click(function(){
         		let cno=$(this).attr("data-cno");
         		let name=$('#gname'+cno).text()
-        		let price=$('#price'+price).text()
+        		let price=$('#price'+cno).text()
         		$.ajax({
         			type:'post',
         			url:'../mypage/mypage_cart_buy.do',
