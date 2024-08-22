@@ -53,8 +53,8 @@
 		width: 100%;
 		height: 40px;
 	}
-	#cart,#buy{
-		width: 250px;
+	#cart,#buy,#list{
+		width: 150px;
 		height: 70px;
 		border: 2px green solid;
 		font-size: 20px;
@@ -74,7 +74,28 @@
 		background-color: green;
 		color:white;
 	}
+	#list{
+		background-color: blue;
+		color:white;
+	}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#sel').change(function(){
+		let account=$('#sel').val()
+		if(account==='수량선택')
+		{
+			alert("수량을 선택하세요")
+			return
+		}
+		let price=$('#sel').attr("data-price")
+		let total=Number(price)*Number(account)
+		$('#total').text(total.toLocaleString()+"원")
+		$('#account').val(account)
+	})
+})
+</script>
 </head>
 <body>
 <div class="wrapper row3">
@@ -131,17 +152,31 @@
 	   </tr>
 	   <tr>
 		   <td width="60%">
-			   <select id="sel">
-				   <option>옵션선택</option>
+			   <select id="sel" data-price="${vo.price }">
+				   <option>수량선택</option>
+				   <c:forEach var="i" begin="1" end="10">
+				    <option>${i }</option>
+				   </c:forEach>
 			   </select>
 		   </td>
 	   </tr>
 	   <tr>
+	     <td width="60%" class="text-right">
+	       총금액:<span id="total">${vo.price}원</span>
+	     </td>
+	   </tr>
+	   <tr>
 		   <td width="60%" class="inline">
-			   <input type="button" value="장바구니" id="cart">
-			   <input type="button" value="바로구매" id="buy"
-			    onclick="requestPay()"
-			   >
+		     <c:if test="${sessionScope.id!=null and type==1}">
+		      <form method="post" action="../goods/cart_insert.do">
+		        <input type="hidden" name="gno" value="${vo.no}">
+		        <input type="hidden" name="price" value="${vo.price}">
+		        <input type="hidden" name="account" value="" id="account">
+		        <input type="submit" value="장바구니" id="cart">
+		      </form>
+			   <input type="button" value="바로구매" id="buy">
+			 </c:if>
+			   <input type="button" value="목록" onclick="javascript:history.back()" id="list">
 		   </td>
 	   </tr>
    </table>

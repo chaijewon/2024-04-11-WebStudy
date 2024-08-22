@@ -7,6 +7,23 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
+/*
+ *    1. Back-End 
+ *        => MVC (동작 순서) 
+ *                 .do                                                          request
+ *           JSP ========== Controller ========= Model =============== Controller ==== JSP
+ *                               |                @RequestMapping()         |
+ *                               --------------------------------------------
+ *                                                   |
+ *                                                 Spring
+ *        => SQL문장 => MyBatis연결 
+ *                                                   
+ *                                                   
+ *    2. Front-End
+ *        => JavaScript : 문법 
+ *        => Jquery 사용법 / Ajax 
+ *        ======================
+ */
 public class RecipeModel {
   // 리턴형 => String / void (Ajax):데이터만 전송 
   //         ====== 화면 변경
