@@ -20,4 +20,5 @@
   <bean id="reserve" class="com.sist.model.ReserveModel"/>
   <bean id="recipe" class="com.sist.model.RecipeModel"/>
   <bean id="recipe" class="com.sist.model.CartModel"/>
+  <bean id="rcommand" class="com.sist.model.RecommandModel"/>
 </beans>
